@@ -60,9 +60,8 @@ body {
 /*Plot and plant labels*/
 .widthLabel {
   z-index: 1;
-  color: white;
-  position: absolute;
-  left: 45%;
+  color: white;  
+  position: absolute; 
   text-shadow: black 1px 1px 2px;
 }
 
@@ -75,6 +74,7 @@ body {
 }
 
 .plotWidthLabel {
+	left: 45%;
   bottom: -20px;
 }
 
@@ -84,6 +84,7 @@ body {
 }
 
 .plantWidthLabel {
+left: 30%;
   top: -20px;
 }
 

@@ -1,7 +1,9 @@
 {
   "settings": {
-    "plantCount": 35,
-    "plotCount": 7
+    "plantCount": 37,
+    "plotCount": 8,
+    "gridHeight": 947,
+    "gridWidth": 1920
   },
   "button": [
     {
@@ -17,9 +19,9 @@
       "id": "BlueBerry",
       "class": "addButton",
       "backgroundImage": "pictures/blueBerry.png",
-      "objCreateMinWidth": 96,
+      "objCreateMinWidth": 72,
       "objCreateMinHeight": 96,
-      "objCreateWidth": 96,
+      "objCreateWidth": 72,
       "objCreateHeight": 96
     },
     {
@@ -102,12 +104,26 @@
       "classType": "plot",
       "class": "plot ui-resizable ui-draggable ui-draggable-handle ui-droppable",
       "backgroundImage": "pictures/ground.jpg",
-      "title": "North Plot",
+      "title": "Plot 6",
       "zIndex": "2",
-      "top": 162,
-      "left": 218,
+      "top": 39,
+      "left": 97,
       "height": 375,
-      "width": 805,
+      "width": 843,
+      "moistureLevel": "20%"
+    },
+    {
+      "id": "plot7",
+      "parentId": "grid",
+      "classType": "plot",
+      "class": "plot ui-resizable ui-draggable ui-draggable-handle ui-droppable",
+      "backgroundImage": "pictures/ground.jpg",
+      "title": "Plot 7",
+      "zIndex": "2",
+      "top": 44,
+      "left": 984,
+      "height": 431,
+      "width": 900,
       "moistureLevel": "20%"
     }
   ],
@@ -191,7 +207,7 @@
       "top": 114,
       "left": 271,
       "height": 24,
-      "width": 528,
+      "width": 512,
       "minWidth": 16,
       "minHeight": 24,
       "datePlanted": "3/16/2019",
@@ -208,7 +224,7 @@
       "top": 157,
       "left": 265,
       "height": 48,
-      "width": 540,
+      "width": 504,
       "minWidth": 36,
       "minHeight": 48,
       "datePlanted": "3/16/2019",
@@ -263,6 +279,23 @@
       "minWidth": 48,
       "minHeight": 72,
       "datePlanted": "3/16/2019",
+      "harvestDate": "12/15/18"
+    },
+    {
+      "id": "plant35",
+      "parentId": "plot7",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/blueBerry.png",
+      "zIndex": "3",
+      "title": "Blue Berry",
+      "top": 0,
+      "left": 1,
+      "height": 384,
+      "width": 864,
+      "minWidth": 72,
+      "minHeight": 96,
+      "datePlanted": "3/23/2019",
       "harvestDate": "12/15/18"
     }
   ]

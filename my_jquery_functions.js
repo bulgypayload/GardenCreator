@@ -6,6 +6,8 @@ var myPlants;
 var plantCount;
 var plotCount;
 var pixelsPerFoot = 24; 
+var gridHeight;
+var gridWidth;
 
 var requestURL = 'garden2.json';
  var request = new XMLHttpRequest();
@@ -20,6 +22,8 @@ var requestURL = 'garden2.json';
 	myPlants = myGarden['plant']; 
     plantCount = myGarden.settings.plantCount;
 	plotCount = myGarden.settings.plotCount; 
+	gridHeight = myGarden.settings.gridHeight;
+	gridWidth = myGarden.settings.gridWidth;
 	}
 
 //---------------------------------------------------------------------------------------------------test
@@ -39,54 +43,30 @@ var fullDate = new Date();
 var month = ((fullDate.getMonth().length+1) === 1)? '0' + (fullDate.getMonth()+1) : (fullDate.getMonth()+1);
 var todaysDate = month + "/" + fullDate.getDate() + "/" + fullDate.getFullYear();
 
-//On window resize change max heigt of container and min width of grid
+//On window resize change Min width of grid
 $(window).resize(function(){
-    $("#container").css({
-      "max-height": $(window).height()-200,
-      "height": $(window).height()-200
-    });
 
-//Resize grid if grid is < container size on resize()
-    $("#grid").css({
-      "min-height": $("#container").height(),
-      "min-width": $("#container").width(),
-      height : function(){
-        if($("#grid").height() < $("#container").height())
-        {
-          return $("#container").height();
-        }
-        else{
-          return $("#grid").height();
-        }
-      },
-      width : function(){
-        if($("#grid").width() < $("#container").width())
-        {
-          return $("#container").width();
-        }
-        else{
-          return $("#grid").width();
-        }
-      }
+	$("#grid").css({
+      "min-height":$(window).height(),
+      "min-width": $(window).width()     	  
     });
 });
 
-//Set initial container and grid values
-$("#container").css({
-  "max-height": $(window).height()-200,
-  "height": $(window).height()-200
-});
-$("#grid").css({
-  "width" : $("#container").width(),
-  "height": $("#container").height(),
-  "min-width": $("#container").width(),
-  "min-height": $("#container").height()
-});
+//Set height of grid and containers
+if(gridWidth < $(window).width())
+{
+	gridWidth = $(window).width();
+}
 
+if(gridHeight < $(window).height())
+{
+	gridHeight = $(window).height(); 
+}
 
-//grid hight width------------------------------------
-// $("#grid").height($(window).height()-10);
-// $("#grid").width($(window).width()-10);
+$("#container").css({"width":"100%", "height": "100%"});
+$("#grid").css({"width":gridWidth, "height": gridHeight});
+
+//Make grid selectable
 $("#grid").selectable();
 
 //Let the grid Items be draggable----------------------
@@ -105,6 +85,8 @@ $("#saveGarden").click(function(){
 	myGarden.plot = myPlots; 
 	myGarden.settings.plantCount = plantCount; 
 	myGarden.settings.plotCount = plotCount; 
+	myGarden.settings.gridWidth = gridWidth;
+	myGarden.settings.gridHeight = gridHeight;
 	console.log(myGarden);
 	
 	//filters the array for undefined values. 	
@@ -126,7 +108,7 @@ $("#addPlot").click(function(){
       classType: "plot",
       class: "plot ui-resizable ui-draggable ui-draggable-handle ui-droppable",
       backgroundImage: "pictures/ground.jpg",
-      title: "North Plot",
+      title: "Plot " + plotCount,
       zIndex: "2",
       top: 20,
       left: 100,
@@ -167,29 +149,33 @@ $("#increaseGridWidth").click(function(){
   $("#grid").animate({
     width: "+=100"
   });
+  gridWidth +=100;
 });
 
 $("#increaseGridHeight").click(function(){
     $("#grid").animate({
       height: "+=100",
     });
+	gridHeight +=100;
 });
 
 
 //Decrease width or height function-------------------------------------
 $("#decreaseGridWidth").click(function(){
-  if( $("#grid").width() > $("#container").width()){
+  if( $("#grid").width() > $(window).width()){
     $("#grid").animate({
       width: "-=100"
     });
+	gridWidth -=100;
   }
 });
 
 $("#decreaseGridHeight").click(function(){
-  if( $("#grid").height() > $("#container").height()){
+  if( $("#grid").height() > $(window).height()){
     $("#grid").animate({
       height: "-=100"
     });
+	gridHeight -=100;
   }
 });
 
@@ -361,21 +347,26 @@ function createStuff( gardenObject){
     });
 
     //$("#" + gardenObject.id).css("background-size", gardenObject.minWidth +"px "+ gardenObject.minHeight+"px");
-    makeResizable(classType, gardenObject );
+    makeResizable(classType, gardenObject);
     makeDraggable(classType, gardenObject);
     createToolTip(classType, gardenObject);
 
-	var width = ($("#" + gardenObject.id).width()/pixelsPerFoot).toFixed(2);
-    var height = ($("#" + gardenObject.id).height()/pixelsPerFoot).toFixed(2);
-	if(width >= 2){
-          $("#" + gardenObject.id + " > div.plantWidthLabel").text(gardenObject.title + " " + width + " ft");
+	var lblWidth = ($("#" + gardenObject.id).width()/pixelsPerFoot).toFixed(2);
+    var lblHeight = ($("#" + gardenObject.id).height()/pixelsPerFoot).toFixed(2);	
+	var lblRowSpacing = (gardenObject.minHeight/pixelsPerFoot).toFixed(2);
+	var lblPlantSpacing = (gardenObject.minWidth/pixelsPerFoot).toFixed(2);
+
+	if(lblWidth >= 12){
+          $("#" + gardenObject.id + " > div.plantWidthLabel").text(gardenObject.title + " "+ lblWidth + "ft" 
+		  +" (Plant " + lblPlantSpacing + "ft / " 
+		  +" Row " + lblRowSpacing + "ft)" );
         }
         else {
-          $("#" + gardenObject.id + " > div.plantWidthLabel").text("");
+          $("#" + gardenObject.id + " > div.plantWidthLabel").text(gardenObject.title + " "+ lblWidth + "ft");
         }
-        if(height >=1)
+        if(lblHeight >=1)
         {
-          $("#" + gardenObject.id + " > div.plantHeightLabel").text(height + " ft");
+          $("#" + gardenObject.id + " > div.plantHeightLabel").text(lblHeight + " ft");
         }
         else {
           $("#" + gardenObject.id + " > div.plantHeightLabel").text("");
@@ -451,15 +442,19 @@ function makeResizable( classType, gardenObject )
       resize: function( event, ui){	  
         var width = (ui.size.width/pixelsPerFoot).toFixed(2);
         var height = (ui.size.height/pixelsPerFoot).toFixed(2);
+		var lblRowSpacing = (gardenObject.minHeight/pixelsPerFoot).toFixed(2);
+		var lblPlantSpacing = (gardenObject.minWidth/pixelsPerFoot).toFixed(2);
 
 		gardenObject.width = ui.size.width; 
 		gardenObject.height = ui.size.height; 
 
-        if(width >= 2){
-          ui.element.children(".plantWidthLabel").text(gardenObject.title + " " + width + " ft");
+        if(width >= 12){
+          ui.element.children(".plantWidthLabel").text(gardenObject.title + " " + width + "ft"
+		  +" (Plant " + lblPlantSpacing + "ft / "		   
+		  +" Row " + lblRowSpacing + "ft)" );
         }
         else {
-          ui.element.children(".plantWidthLabel").text("");
+          ui.element.children(".plantWidthLabel").text(gardenObject.title + " " + width + "ft ");
         }
         if(height >=1)
         {
