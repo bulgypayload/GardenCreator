@@ -16,7 +16,7 @@
     {
       "id": "BlueBerry",
       "class": "addButton",
-      "backgroundImage": "pictures/BlueBerry.png",
+      "backgroundImage": "pictures/blueBerry.png",
       "objCreateMinWidth": 96,
       "objCreateMinHeight": 96,
       "objCreateWidth": 96,
