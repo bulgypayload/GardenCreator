@@ -125,7 +125,7 @@ $("#addPlot").click(function(){
       parentId: "grid",
       classType: "plot",
       class: "plot ui-resizable ui-draggable ui-draggable-handle ui-droppable",
-      backgroundImage: "Pictures/ground.jpg",
+      backgroundImage: "pictures/ground.jpg",
       title: "North Plot",
       zIndex: "2",
       top: 20,
@@ -148,7 +148,7 @@ $("#addPlant").click(function(){
 	var newButton = {
 	  id: plantTitle,
       class: "addButton",
-      backgroundImage: "Pictures/tomato2.png",
+      backgroundImage: "pictures/tomato2.png",
 	  title: plantTitle,
       objCreateMinWidth: 50,
       objCreateMinHeight: 60,
