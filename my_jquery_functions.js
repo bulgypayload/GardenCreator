@@ -20,12 +20,10 @@ var requestURL = 'garden2.json';
 	myButtons = myGarden['button'];
 	myPlots = myGarden['plot'];
 	myPlants = myGarden['plant']; 
-    plantCount = myGarden.settings.plantCount;
+    	plantCount = myGarden.settings.plantCount;
 	plotCount = myGarden.settings.plotCount; 
 	gridHeight = myGarden.settings.gridHeight;
 	gridWidth = myGarden.settings.gridWidth;
-	}
-
 //---------------------------------------------------------------------------------------------------test
 
 $(document).ready(function(){
@@ -214,7 +212,7 @@ $(document).keyup(function(e){
 	myPlots = myPlots.filter(function(x) { return true });
 });
 
-});//end document ready function
+});}//end document ready function
 
 //Populate the grid Function-------------------------------------------------------------------------test
 function populateGrid()
