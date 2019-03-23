@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<head>
+  <meta charset="utf-8">
+  <!-- This is the insertion of the javascript and jQuery files -->
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="jquery-ui.css">
+  <script src="jquery-3.3.1.js"></script>
+  <script src="jquery-ui.js"></script>
+  <script src="jquery.ui.touch-punch.min.js"></script>
+  <script src="my_jquery_functions.js"></script>
+
+</head>
+<title>Garden Tracker</title>
+
+<!-- This is the start of the body -->
+<body>
+<h1>Garden Tracker</h1>
+<div id="toolBar">
+<button id="saveGarden" class="addButton" title="Save">Save</button>
+<button id="addPlot" class="addButton" title="Add Plot">Add Plot</button>
+<button id="addPlant" class="addButton" title="Add Plant">Add Plant</button>
+</div>
+<!--This is the popup for for the new plants-->
+
+
+ <!-- Button to open the modal login form -->
+
+<!-- The Modal -->
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close">&times;</span>
+
+  <!-- Modal Content -->
+  <form class="modal-content animate" >
+    
+		<!--<img src="Pictures/greenBean.png" alt="Plant">-->		
+		<!--
+		  This is the html for the picture slide show
+		  -->
+		   <!-- Container for the image gallery -->
+		<div class="containerSlideshow">
+		<div class="mySlideShow">			
+		
+			  <!-- Full-width images with number text -->
+			  <div class="mySlides">
+				  <img src="Pictures/tomato2.png" >
+			  </div>
+
+			  <div class="mySlides">
+				  <img src="Pictures/greenBean.png" >
+			  </div>
+
+			  <div class="mySlides">
+				  <img src="Pictures/pepper.png" >
+			  </div>
+
+			  <div class="mySlides">
+				  <img src="Pictures/coop.png" >
+			  </div>
+
+			  <div class="mySlides">
+				  <img src="Pictures/lettuce.png" >
+			  </div>
+
+			  <div class="mySlides">
+				  <img src="Pictures/corn.png" >
+			  </div>
+			  
+			  <div class="mySlides">
+				  <img src="Pictures/mushroom2.png">
+			  </div>	  
+		  
+		  </div>
+		  
+		  <!-- Image text -->
+		  <div class="caption-container">
+			<p id="caption"></p>
+		  </div>		  
+
+		  <!-- Thumbnail images -->
+		  <div class="row">
+			<div class="column">
+			  <img class="demo cursor" src="Pictures/tomato2.png" style="width:100%" onclick="currentSlide(1)" alt="Tomato">
+			</div>
+			<div class="column">
+			  <img class="demo cursor" src="Pictures/greenBean.png" style="width:100%" onclick="currentSlide(2)" alt="Green Beans">
+			</div>
+			<div class="column">
+			  <img class="demo cursor" src="Pictures/pepper.png" style="width:100%" onclick="currentSlide(3)" alt="Pepper">
+			</div>
+			<div class="column">
+			  <img class="demo cursor" src="Pictures/coop.png" style="width:100%" onclick="currentSlide(4)" alt="Chicken Coop">
+			</div>
+			<div class="column">
+			  <img class="demo cursor" src="Pictures/lettuce.png" style="width:100%" onclick="currentSlide(5)" alt="Lettuce">
+			</div>
+			<div class="column">
+			  <img class="demo cursor" src="Pictures/corn.png" style="width:100%" onclick="currentSlide(6)" alt="Corn">
+			</div>
+			<div class="column">
+			  <img class="demo cursor" src="Pictures/mushroom2.png" style="width:100%" onclick="currentSlide(7)" alt="Mushrooms">
+			</div>
+		  </div>
+		</div> 
+
+		<script>
+			var slideIndex = 1;
+			showSlides(slideIndex);
+
+			// Next/previous controls
+			function plusSlides(n) {
+			  showSlides(slideIndex += n);
+			}
+
+			// Thumbnail image controls
+			function currentSlide(n) {
+			  showSlides(slideIndex = n);
+			}
+
+			function showSlides(n) {
+			  var i;
+			  var slides = document.getElementsByClassName("mySlides");
+			  var dots = document.getElementsByClassName("demo");
+			  var captionText = document.getElementById("caption");
+			  if (n > slides.length) {slideIndex = 1}
+			  if (n < 1) {slideIndex = slides.length}
+			  for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			  }
+			  for (i = 0; i < dots.length; i++) {
+				dots[i].className = dots[i].className.replace(" active", "");
+			  }
+			  slides[slideIndex-1].style.display = "block";
+			  dots[slideIndex-1].className += " active";
+			  captionText.innerHTML = dots[slideIndex-1].alt;
+			}
+		</script>
+		<!--
+		This ends the picture slide show.
+		-->
+		
+		  
+		<div class="formSection">
+			<div class="splitLine">
+				  <label for="variety"><b>Plant Variety</b></label>	
+				  <label for="daysToHarvest"><b>Days to Harvest</b></label>
+			 </div>
+		 </div>
+		 
+		 <div class="formSection">
+			<div class="splitLine">
+				<input id="variety" type="text" placeholder="Tomato, Watermelon, Green Beans...." name="variety" required>
+				<input id="daysToHarvest" type="text" placeholder="Days to expected harvest" name="daysToHarvest" required>
+			</div>
+		 </div>
+
+		 <div class="formSection">
+			 <div class="splitLine">
+				  <label for="rowSpacing"><b>Row Spacing</b></label>	  
+				  <label for="plantSpacing"><b>Plant Spacing</b></label>
+			  </div>
+		 </div>
+		 
+		 <div class="formSection">
+			 <div class="splitLine">
+				  <input type="text" placeholder="Plant spacing in inches" name="rowSpacing" required>
+				  <input type="text" placeholder="Row spacing in inches" name="plantSpacing" required>
+			  </div>
+		 </div>
+		 		 
+		 
+		 <div class="formSection">
+		  <label for="backImage"><b>Image</b></label>
+		</div>
+
+		<div class="formSection"> 
+			<div class="splitLine">
+				  <input id="picInput" type="text" placeholder="Select an image or choose a default." name="backImage" required>
+				  <button id="buttonBrowse" type="button">Browse..</button>
+			</div>
+		 </div>
+		<div class="formSection">
+			<div class="splitLine">
+			  <button id="buttonAdd" type="submit">Add</button>
+			  <button id="buttonCancel"type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+			</div>
+		</div>
+  </form>
+
+</div> <!--This is the end of the popup form-->
+
+
+<div id="container">
+	<div id="grid">
+		<button id="increaseGridWidth" title="Click to increase grid width">+ width</button>
+		<button id="decreaseGridWidth" title="Click to decrease grid width">- width</button>
+		<button id="increaseGridHeight" title="Click to increase grid height">+ Height</button>
+		<button id="decreaseGridHeight" title="Click to decrease grid height">- Height</button>
+	</div>
+</div>
+</body>
+</html>
