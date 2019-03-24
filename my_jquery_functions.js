@@ -20,7 +20,7 @@ var requestURL = 'garden2.json';
 	myButtons = myGarden['button'];
 	myPlots = myGarden['plot'];
 	myPlants = myGarden['plant']; 
-    	plantCount = myGarden.settings.plantCount;
+    plantCount = myGarden.settings.plantCount;
 	plotCount = myGarden.settings.plotCount; 
 	gridHeight = myGarden.settings.gridHeight;
 	gridWidth = myGarden.settings.gridWidth;
@@ -74,6 +74,12 @@ var plot = ".plot";
 var plantNumber = 0;
 
 //-----------------------------old place of myGarden-----------------------------------------------test
+
+//This is the save button onclick function. 
+$("#deleteObject").click(function(){  
+    deleteSelected();   
+});
+
 
 //This is the save button onclick function. 
 $("#saveGarden").click(function(){ 	
@@ -181,60 +187,69 @@ $("#decreaseGridHeight").click(function(){
 $(document).keyup(function(e){
   if(e.which === 46)
   {
-	//$(".ui-selected").remove();
-	var itemToRemove =[]; 	
-	itemToRemove = $(".ui-selected").toArray();
-
-	for(var i = 0; i < itemToRemove.length; i++)
-	{		
-		for(var k = 0; k < myPlots.length; k++)
-		{			
-			if(myPlots[k] != null && itemToRemove[i]['id'] === myPlots[k]['id'])
-			{
-				delete myPlots[k];			
-			}
-		}//end of for
-
-		for(var k = 0; k < myPlants.length; k++)
-		{
-			if(myPlants[k] != null && itemToRemove[i]['id'] === myPlants[k]['id'])
-			{
-				delete myPlants[k];			
-			}
-		}//end of for
-	}
-	$(".ui-selected").remove();
+	deleteSelected();
   }
-
-	myPlants = myPlants.filter(function(x) { return true }); 
-	myPlants = myPlants.filter(function(x) { return true });
-	myPlots = myPlots.filter(function(x) { return true }); 
-	myPlots = myPlots.filter(function(x) { return true });
+	//myPlants = myPlants.filter(function(x) { return true }); 
+	//myPlants = myPlants.filter(function(x) { return true });
+	//myPlots = myPlots.filter(function(x) { return true }); 
+	//myPlots = myPlots.filter(function(x) { return true });
 });
+
+//Deletes the selected elements
+function deleteSelected() {
+    // body...
+    //$(".ui-selected").remove();
+    var itemToRemove =[];   
+    itemToRemove = $(".ui-selected").toArray();
+
+    for(var i = 0; i < itemToRemove.length; i++)
+    {       
+        for(var k = 0; k < myPlots.length; k++)
+        {           
+            if(myPlots[k] != null && itemToRemove[i]['id'] === myPlots[k]['id'])
+            {
+                delete myPlots[k];          
+            }
+        }//end of for
+
+        for(var k = 0; k < myPlants.length; k++)
+        {
+            if(myPlants[k] != null && itemToRemove[i]['id'] === myPlants[k]['id'])
+            {
+                delete myPlants[k];         
+            }
+        }//end of for
+    }
+    $(".ui-selected").remove();
+
+    myPlants = myPlants.filter(function(x) { return true }); 
+    myPlants = myPlants.filter(function(x) { return true });
+    myPlots = myPlots.filter(function(x) { return true }); 
+    myPlots = myPlots.filter(function(x) { return true });
+}//end delete selected elements
 
 });}//end document ready function
 
-//Populate the grid Function-------------------------------------------------------------------------test
+//Populate the grid Function-------------------------------------------------------------------------
 function populateGrid()
 {  
+    //add the buttons to menu
+    for(var i = 0; i < myButtons.length; i++)
+    {
+        createButton(myButtons[i]);
+    }
 
-  //add the buttons to menu
-  for(var i = 0; i < myButtons.length; i++)
-  {
-	createButton(myButtons[i]);
-  }
+    //Create the plots 
+    for(var i = 0; i < myPlots.length; i++)
+    {
+    	createStuff(myPlots[i]);
+    } 
 
-  //Create the plots 
-  for(var i = 0; i < myPlots.length; i++)
-  {
-  	  createStuff(myPlots[i]);
-  } 
-  
-  //get the stand alone plants from the json object  
-	for(var i = 0; i < myPlants.length; i++)
-	{
-	createStuff( myPlants[i]); 		
-	}     
+    //get the stand alone plants from the json object  
+    for(var i = 0; i < myPlants.length; i++)
+    {
+        createStuff( myPlants[i]); 		
+    }     
 }//end populate grid function
 
 
@@ -278,10 +293,27 @@ function populateGrid()
 //Create stuff with areguments classType, title backgroundImage, itemSize, datePlanted, dateHarvest and moistureLevel
 function createStuff( gardenObject){
 
-	var classType = gardenObject.classType; 
+    var classType = gardenObject.classType; 
 
   if( classType === "plot")
   {
+    createPlot(gardenObject);
+  }  
+  else if(classType === "plantJ" || classType ==="plant")
+  {
+	createPlant(gardenObject);	
+  }
+  else {
+    alert("No stuff added.");
+  }
+  // $(classType + ":first").css("left", "50%");
+  $("#" + gardenObject.id).css("position", "absolute");
+  addClick(gardenObject);
+}
+
+//Create the plotsObject
+function createPlot(gardenObject) {
+    // body...
     $("#grid").prepend("<div id="+ gardenObject.id +" class=plot title=plot><div class=plotWidthLabel widthLabel></div><div class=plotHeightLabel heightLabel></div></div>");
     $(".plotWidthLabel").addClass("widthLabel");
     $(".plotHeightLabel").addClass("heightLabel");
@@ -292,51 +324,39 @@ function createStuff( gardenObject){
       left: gardenObject.left,
       top: gardenObject.top
     });
-    makeResizable(classType, gardenObject);
-    makeDraggable(classType, gardenObject);
-    makeDroppable(classType, gardenObject);
-    createToolTip(classType, gardenObject);	
+    makeResizable(gardenObject);
+    makeDraggable(gardenObject);
+    makeDroppable(gardenObject.classType, gardenObject);
+    createToolTip(gardenObject); 
 
-	var width = ($("#" + gardenObject.id).width()/pixelsPerFoot).toFixed(2);
-	var height = ($("#" + gardenObject.id).height()/pixelsPerFoot).toFixed(2);
-	$(".plotWidthLabel:first").text(width + " ft"); 
-	$(".plotHeightLabel:first").text(height + " ft");
+    var width = ($("#" + gardenObject.id).width()/pixelsPerFoot).toFixed(2);
+    var height = ($("#" + gardenObject.id).height()/pixelsPerFoot).toFixed(2);
+    $(".plotWidthLabel:first").text(width + " ft"); 
+    $(".plotHeightLabel:first").text(height + " ft");
 
-  }  
-  else if(classType === "plantJ" || classType ==="plant")
-  {
-	
+}//end createPlot
 
-	//Create the garden object by finding the parent and prepending to the html
-	$("#" + gardenObject.parentId).prepend("<div id="+ gardenObject.id+" class=plantJ title=plant>"
-	+ "<div class=plantWidthLabel></div>"
-	+ "<div class=plantHeightLabel></div>"
-	+"<div id="+ gardenObject.id +"picture class=plantJ title=plant>"
-	+"</div>");
+//Creates a plant object
+function createPlant(gardenObject){
+    //Create the garden object by finding the parent and prepending to the html
+    $("#" + gardenObject.parentId).prepend("<div id="+ gardenObject.id+" class=plantJ title=plant>"
+    + "<div class=plantWidthLabel></div>"
+    + "<div class=plantHeightLabel></div>"
+    +"<div id="+ gardenObject.id +"picture class=plantJ title=plant>"
+    +"</div>");
     $(".plantWidthLabel").addClass("widthLabel");
-    $(".plantHeightLabel").addClass("heightLabel");  	
+    $(".plantHeightLabel").addClass("heightLabel");     
 
-	//Sets the background picture for the plant creates the size and repeats 
-	$("#" + gardenObject.id+ "picture").css("background-image", "url(" + gardenObject.backgroundImage +")");
-	$("#" + gardenObject.id + "picture").css({
+    //Sets the background picture for the plant creates the size and repeats 
+    $("#" + gardenObject.id+ "picture").css("background-image", "url(" + gardenObject.backgroundImage +")");
+    $("#" + gardenObject.id + "picture").css({
       height: "100%",
       width: "100%",
-	  "background-repeat": "repeat",
+      "background-repeat": "repeat",
     });
-	$("#" + gardenObject.id + "picture").css("background-size", gardenObject.minWidth +"px "+ gardenObject.minHeight +"px");
-	
-	/*
-	This is if you want to do padding on the plant rows
-	var paddingBottom = gardenObject.minHeight*.5;
-	var paddingSide = gardenObject.minWidth *.5;		
-	$("#" + gardenObject.id).css({
-      "padding-right": paddingSide +"px",
-      "padding-left": paddingSide + "px",
-	  "padding-bottom": paddingBottom +"px"
-    });*/
-	
-	///---------------------------------
-
+    $("#" + gardenObject.id + "picture").css("background-size", gardenObject.minWidth +"px "+ gardenObject.minHeight +"px");
+    
+    
     $("#" + gardenObject.id).css({
       height: gardenObject.height,
       width: gardenObject.width,
@@ -345,19 +365,19 @@ function createStuff( gardenObject){
     });
 
     //$("#" + gardenObject.id).css("background-size", gardenObject.minWidth +"px "+ gardenObject.minHeight+"px");
-    makeResizable(classType, gardenObject);
-    makeDraggable(classType, gardenObject);
-    createToolTip(classType, gardenObject);
+    makeResizable( gardenObject );
+    makeDraggable( gardenObject );
+    createToolTip( gardenObject );
 
-	var lblWidth = ($("#" + gardenObject.id).width()/pixelsPerFoot).toFixed(2);
-    var lblHeight = ($("#" + gardenObject.id).height()/pixelsPerFoot).toFixed(2);	
-	var lblRowSpacing = (gardenObject.minHeight/pixelsPerFoot).toFixed(2);
-	var lblPlantSpacing = (gardenObject.minWidth/pixelsPerFoot).toFixed(2);
+    var lblWidth = ($("#" + gardenObject.id).width()/pixelsPerFoot).toFixed(2);
+    var lblHeight = ($("#" + gardenObject.id).height()/pixelsPerFoot).toFixed(2);   
+    var lblRowSpacing = (gardenObject.minHeight/pixelsPerFoot).toFixed(2);
+    var lblPlantSpacing = (gardenObject.minWidth/pixelsPerFoot).toFixed(2);
 
-	if(lblWidth >= 12){
+    if(lblWidth >= 12){
           $("#" + gardenObject.id + " > div.plantWidthLabel").text(gardenObject.title + " "+ lblWidth + "ft" 
-		  +" (Plant " + lblPlantSpacing + "ft / " 
-		  +" Row " + lblRowSpacing + "ft)" );
+                +" (Plant " + lblPlantSpacing + "ft / " 
+                +" Row " + lblRowSpacing + "ft)" );
         }
         else {
           $("#" + gardenObject.id + " > div.plantWidthLabel").text(gardenObject.title + " "+ lblWidth + "ft");
@@ -369,18 +389,13 @@ function createStuff( gardenObject){
         else {
           $("#" + gardenObject.id + " > div.plantHeightLabel").text("");
         }
-  }
-  else {
-    alert("No stuff added.");
-  }
-  // $(classType + ":first").css("left", "50%");
-  $("#" + gardenObject.id).css("position", "absolute");
-  addClick(gardenObject);
-}
+
+}//end create plant
 
 //Make Item draggable based on classType plant or plot
-function makeDraggable(classType, gardenObject )
+function makeDraggable(gardenObject )
 {
+    var classType = gardenObject.classType;
   if(classType === "plot")
   {
     $("#" + gardenObject.id).draggable({
@@ -414,8 +429,10 @@ function makeDraggable(classType, gardenObject )
 }//end draggable
 
 //function makeResizable-----------------------------
-function makeResizable( classType, gardenObject )
+function makeResizable( gardenObject )
 {
+    var classType = gardenObject.classType; 
+
   if(classType === "plot"){
     $("#" + gardenObject.id).resizable({
       minHeight: 60,
@@ -448,12 +465,16 @@ function makeResizable( classType, gardenObject )
 
         if(width >= 12){
           ui.element.children(".plantWidthLabel").text(gardenObject.title + " " + width + "ft"
-		  +" (Plant " + lblPlantSpacing + "ft / "		   
-		  +" Row " + lblRowSpacing + "ft)" );
+		      +" (Plant " + lblPlantSpacing + "ft / "		   
+		      +" Row " + lblRowSpacing + "ft)" );
         }
-        else {
+        else if(width >=5 ){
           ui.element.children(".plantWidthLabel").text(gardenObject.title + " " + width + "ft ");
         }
+        else{
+          ui.element.children(".plantWidthLabel").text(width + "ft ");   
+        }
+
         if(height >=1)
         {
           ui.element.children(".plantHeightLabel").text(height + " ft");
@@ -464,133 +485,118 @@ function makeResizable( classType, gardenObject )
       }
     });
   }
-}
-
+}//end makeResizable
 
 //Make item droppable------------------------------
 function makeDroppable( classType, gardenObject ){
   if(classType === "plot")
   {
-    $("#" + gardenObject.id).droppable({
-        tolerance: "touch",
-        accept: ".plantJ, .plant",
-        drop: function(event, ui){
-		$(this).prepend(ui.draggable);
-          var left  = ui.offset.left - $(this).offset().left;
-          var top   = ui.offset.top - $(this).offset().top;          
-          $(ui.draggable).css({
-          "top": top,
-          "left": left
-        }); 	 
-		  
-		  console.log(ui.draggable);
-		  console.log(gardenObject.id);
-		  
-
-		  //Loops throught the json to find the object id and changes the parent for the plant....
-		  for(var i = 0; i < myPlants.length; i++)
-		  {			  
-			if(myPlants[i]['id'] === ui.draggable.attr("id"))
-			{
-				console.log("Orgin: " + myPlants[i]['parentId']);
-				myPlants[i]['parentId'] = gardenObject.id;
-				myPlants[i]['top'] = top;
-				myPlants[i]['left'] = left;
-				console.log(" Change: " + myPlants[i]['parentId']);
-				console.log("Top: "+myPlants[i]['top']);
-				console.log("Left: "+myPlants[i]['left']);
-			}
-		  }	//end for	  
-		  
-        }//Drop function
-      });//End droppable
+    makePlotDroppable(gardenObject);
   }
   else if(classType === "#grid")
   {
-    $("#grid").droppable({
-      tolerance: "fit",
-      drop: function(event, ui){
-	  $(this).prepend(ui.draggable);        
-	  var left  = ui.offset.left - $(this).offset().left;
-        var top   = ui.offset.top - $(this).offset().top;        
-        $(ui.draggable).css({
-          "top": top,
-          "left": left
-        }); 
-		console.log(ui.draggable);
-
-		  //Loops throught the json to find the object id and changes the parentId for the plant....
-		  for(var i = 0; i < myPlants.length; i++)
-		  {			  
-			if(myPlants[i]['id'] === ui.draggable.attr("id") && myPlants[i]['id'] !== undefined)
-			{
-				console.log("Orgin: " + myPlants[i]['parentId']);
-				myPlants[i]['parentId'] = "grid";
-				console.log(" Change: " + myPlants[i]['parentId']);
-				myPlants[i]['top'] = top;
-				myPlants[i]['left'] = left;
-				console.log(" Change: " + myPlants[i]['parentId']);
-				console.log("Top: "+myPlants[i]['top']);
-				console.log("Left: "+myPlants[i]['left']);
-			}
-		  }	//end for
-
-		}//end function
-    });
+    makeGridDroppable();
   }//end if
   else {
     alert("Cannot drop here.")
   }
 }//end function make Droppable
 
+//This function makes the plot element droppable
+function makePlotDroppable(gardenObject) {
+    // body...
+    $("#" + gardenObject.id).droppable({
+        tolerance: "touch",
+        accept: ".plantJ, .plant",
+        drop: function(event, ui){            
+                $(this).prepend(ui.draggable);
+
+                var left  = ui.offset.left - $(this).offset().left;
+                var top   = ui.offset.top - $(this).offset().top;    
+
+                $(ui.draggable).css({
+                    "top": top,
+                    "left": left
+                });
+
+                //Loops throught the json to find the object id and changes the parent for the plant....
+                for(var i = 0; i < myPlants.length; i++)
+                {             
+                    if(myPlants[i]['id'] === ui.draggable.attr("id"))
+                    {                        
+                        myPlants[i]['parentId'] = gardenObject.id;
+                        myPlants[i]['top'] = top;
+                        myPlants[i]['left'] = left;
+                    }
+                }   //end for     
+        }//Drop function
+    });//End droppable
+}//end the makePlotDroppable
+
+//This function makes elements droppable on the grid
+function makeGridDroppable() {
+    // body...
+    $("#grid").droppable({
+      tolerance: "fit",
+      drop: function(event, ui){
+                $(this).prepend(ui.draggable);
+                var left = ui.offset.left - $(this).offset().left;
+                var top = ui.offset.top - $(this).offset().top; 
+
+                $(ui.draggable).css({
+                  "top": top,
+                  "left": left
+                });     
+
+              //Loops throught the json to find the object id and changes the parentId for the plant....
+                for(var i = 0; i < myPlants.length; i++)
+                {             
+                    if(myPlants[i]['id'] === ui.draggable.attr("id") && myPlants[i]['id'] !== undefined)
+                    {                    
+                        myPlants[i]['parentId'] = "grid";
+                        myPlants[i]['top'] = top;
+                        myPlants[i]['left'] = left;
+                    }
+                }   //end for
+            }//end function
+    });
+}//End makeGridDroppable
+
 //Add click function for object selections---------------------
 function addClick( gardenObject) {
-  if(gardenObject.classType === "plant" || gardenObject.classType === "plantJ")
-  {
-    $("#" + gardenObject.id).click(function(e){
-      $(this).addClass("ui-selected");
-       e.stopPropagation();
-    });
- }
- else if(gardenObject.classType === "plot")
- {
-   $("#" + gardenObject.id).click(function(){
-     $(this).addClass("ui-selected");
-     $(this).children().addClass("ui-selected");
-   });
- }
-  else {
-    alert("No click");
-  }
-};
+    if(gardenObject.classType === "plant" || gardenObject.classType === "plantJ")
+    {
+        $("#" + gardenObject.id).click(function(e){
+            $(this).addClass("ui-selected");
+            e.stopPropagation();
+        });
+    }
+    else if(gardenObject.classType === "plot")
+    {
+        $("#" + gardenObject.id).click(function(){
+            $(this).addClass("ui-selected");
+            $(this).children().addClass("ui-selected");
+        });
+    }
+    else 
+    {
+        alert("No click");
+    }
+}
 
 //This is the function for the createToolTip
-function createToolTip(selector, gardenObject, moistureLevel)
+function createToolTip(gardenObject)
 {
+        var selector = gardenObject.classType
+
   $("#" + gardenObject.id).tooltip({
         content: function(event, ui){
           if(selector ==="plant" || selector ==="plantJ")
           {	
-            return "<b>" + gardenObject.title
-			+ "<br>Planted:</b> "+ gardenObject.datePlanted
-			+"<br><b>Harvest:</b>" + gardenObject.harvestDate 
-			+"<br><b>Plant Spacing:</b> " + (gardenObject.minWidth/pixelsPerFoot).toFixed(2) 
-			+" ft<br><b>Row Spacing:</b> " + (gardenObject.minHeight/pixelsPerFoot).toFixed(2)
-			+" ft<br><b># of Plants:</b> " + ((gardenObject.height/gardenObject.minHeight) * (gardenObject.width/ gardenObject.minWidth))
-			+"<br><b>Rows: </b>" +  (gardenObject.height/ gardenObject.minHeight)
-			+"<br><b>Plants per row: </b>" +  (gardenObject.width/ gardenObject.minWidth)
-			+"<br><button class=editButton>Edit</button>";
+            return createPlantTooltipString(gardenObject);
           }
           else {
-            var width = $(this).width();
-            var height = $(this).height();
-            height /=pixelsPerFoot; 
-            width /=pixelsPerFoot;
-            width = width.toFixed(2);
-            height = height.toFixed(2);
-            return "<b>" + gardenObject.title + "</b><br><b>Moisture: </b>"+gardenObject.moistureLevel+"<br><b>Width: </b>" 
-			+ width +  "ft<br><b>Length: </b>" + height 
-			+"ft <br><button class=editButton>Edit</button>";
+            return createPlotTooltipString($(this), gardenObject);
           }
         },
         disabled: false,
@@ -603,20 +609,49 @@ function createToolTip(selector, gardenObject, moistureLevel)
             function () {
                 $(this).fadeOut("400", function () {
                     $(this).remove();
-                })
+                    })
             });
+            $(".ui-helper-hidden-accessible").children(":not(:last)").remove();
         }
     });
 }//end tooltip functions
 
+//Create the plot tooltip string
+function createPlotTooltipString(plot, gardenObject) {
+    // body...
+    var width = plot.width();
+    var height = plot.height();
+    height /=pixelsPerFoot; 
+    width /=pixelsPerFoot;
+    width = width.toFixed(2);
+    height = height.toFixed(2);
+    return "<b>" + gardenObject.title + "</b><br><b>Moisture: </b>"+gardenObject.moistureLevel+"<br><b>Width: </b>" 
+           + width +  "ft<br><b>Length: </b>" + height 
+           +"ft <br><button class=editButton>Edit</button>";
+}
+
+
+//creates the plant tool tip html
+function createPlantTooltipString(gardenObject) {
+    return "<b>" + gardenObject.title
+                   + "<br>Planted:</b> "+ gardenObject.datePlanted
+                   +"<br><b>Harvest:</b>" + gardenObject.harvestDate 
+                   +"<br><b>Plant Spacing:</b> " + (gardenObject.minWidth/pixelsPerFoot).toFixed(2) 
+                   +" ft<br><b>Row Spacing:</b> " + (gardenObject.minHeight/pixelsPerFoot).toFixed(2)
+                   +" ft<br><b># of Plants:</b> " + ((gardenObject.height/gardenObject.minHeight) * (gardenObject.width/ gardenObject.minWidth))
+                   +"<br><b>Rows: </b>" +  (gardenObject.height/ gardenObject.minHeight)
+                   +"<br><b>Plants per row: </b>" +  (gardenObject.width/ gardenObject.minWidth)
+                   +"<br><button class=editButton>Edit</button>";
+}
+
 //Function that disable the tooltip based on classType class or id
 function disableToolTip(classType)
 {
-  $(classType).tooltip("option","disable", true);
+  $(classType).tooltip("option","disabled", true);
 }
 
 //Function that enable the tooltip based on classType class or id
 function enableToolTip(classType)
 {
-  $(classType).tooltip("option", "enable", false);
+  $(classType).tooltip("option", "disabled", false);
 }

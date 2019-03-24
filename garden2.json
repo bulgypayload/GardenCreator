@@ -1,7 +1,7 @@
 {
   "settings": {
-    "plantCount": 37,
-    "plotCount": 8,
+    "plantCount": 38,
+    "plotCount": 9,
     "gridHeight": 947,
     "gridWidth": 1920
   },
@@ -106,24 +106,10 @@
       "backgroundImage": "pictures/ground.jpg",
       "title": "Plot 6",
       "zIndex": "2",
-      "top": 39,
-      "left": 97,
+      "top": 45,
+      "left": 127,
       "height": 375,
       "width": 843,
-      "moistureLevel": "20%"
-    },
-    {
-      "id": "plot7",
-      "parentId": "grid",
-      "classType": "plot",
-      "class": "plot ui-resizable ui-draggable ui-draggable-handle ui-droppable",
-      "backgroundImage": "pictures/ground.jpg",
-      "title": "Plot 7",
-      "zIndex": "2",
-      "top": 44,
-      "left": 984,
-      "height": 431,
-      "width": 900,
       "moistureLevel": "20%"
     }
   ],
@@ -279,23 +265,6 @@
       "minWidth": 48,
       "minHeight": 72,
       "datePlanted": "3/16/2019",
-      "harvestDate": "12/15/18"
-    },
-    {
-      "id": "plant35",
-      "parentId": "plot7",
-      "classType": "plant",
-      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
-      "backgroundImage": "pictures/blueBerry.png",
-      "zIndex": "3",
-      "title": "Blue Berry",
-      "top": 0,
-      "left": 1,
-      "height": 384,
-      "width": 864,
-      "minWidth": 72,
-      "minHeight": 96,
-      "datePlanted": "3/23/2019",
       "harvestDate": "12/15/18"
     }
   ]
