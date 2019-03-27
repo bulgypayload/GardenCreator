@@ -34,45 +34,12 @@
 
  <!-- Modal Content -->
   <form class="modal-content animate" >
-    
-		<!--<img src="pictures/greenBean.png" alt="Plant">-->		
 		<!--
 		  This is the html for the picture slide show
 		  -->
 		   <!-- Container for the image gallery -->
 		<div class="containerSlideshow">
-		<div class="mySlideShow">			
-		
-			  <!-- Full-width images with number text -->
-			  <div class="mySlides">
-				  <img src="pictures/tomato2.png" >
-			  </div>
-
-			  <div class="mySlides">
-				  <img src="pictures/greenBean.png" >
-			  </div>
-
-			  <div class="mySlides">
-				  <img src="pictures/pepper.png" >
-			  </div>
-
-			  <div class="mySlides">
-				  <img src="pictures/coop.png" >
-			  </div>
-
-			  <div class="mySlides">
-				  <img src="pictures/lettuce.png" >
-			  </div>
-
-			  <div class="mySlides">
-				  <img src="pictures/corn.png" >
-			  </div>
-			  
-			  <div class="mySlides">
-				  <img src="pictures/mushroom2.png">
-			  </div>	  
-		  
-		  </div>
+		<div id="idMySlideShow" class="mySlideShow"></div>
 		  
 		  <!-- Image text -->
 		  <div class="caption-container">
@@ -80,68 +47,9 @@
 		  </div>		  
 		  
 		  <!-- Thumbnail images -->
-		  <div class="row">
-			<div class="column">
-			  <img class="demo cursor" src="pictures/tomato2.png" style="width:100%" onclick="currentSlide(1)" alt="Tomato">
-			</div>
-			<div class="column">
-			  <img class="demo cursor" src="pictures/greenBean.png" style="width:100%" onclick="currentSlide(2)" alt="Green Beans">
-			</div>
-			<div class="column">
-			  <img class="demo cursor" src="pictures/pepper.png" style="width:100%" onclick="currentSlide(3)" alt="Pepper">
-			</div>
-			<div class="column">
-			  <img class="demo cursor" src="pictures/coop.png" style="width:100%" onclick="currentSlide(4)" alt="Chicken Coop">
-			</div>
-			<div class="column">
-			  <img class="demo cursor" src="pictures/lettuce.png" style="width:100%" onclick="currentSlide(5)" alt="Lettuce">
-			</div>
-			<div class="column">
-			  <img class="demo cursor" src="pictures/corn.png" style="width:100%" onclick="currentSlide(6)" alt="Corn">
-			</div>
-			<div class="column">
-			  <img class="demo cursor" src="pictures/mushroom2.png" style="width:100%" onclick="currentSlide(7)" alt="Mushrooms">
-			</div>
-		  </div>
+		  <div id="myRow" class="row"></div>
 		</div> 
-
-		<script>
-			var slideIndex = 1;
-			showSlides(slideIndex);
-
-			// Next/previous controls
-			function plusSlides(n) {
-			  showSlides(slideIndex += n);
-			}
-
-			// Thumbnail image controls
-			function currentSlide(n) {
-			  showSlides(slideIndex = n);
-			}
-
-			function showSlides(n) {
-			  var i;
-			  var slides = document.getElementsByClassName("mySlides");
-			  var dots = document.getElementsByClassName("demo");
-			  var captionText = document.getElementById("caption");
-			  if (n > slides.length) {slideIndex = 1}
-			  if (n < 1) {slideIndex = slides.length}
-			  for (i = 0; i < slides.length; i++) {
-				slides[i].style.display = "none";
-			  }
-			  for (i = 0; i < dots.length; i++) {
-				dots[i].className = dots[i].className.replace(" active", "");
-			  }
-			  slides[slideIndex-1].style.display = "block";
-			  dots[slideIndex-1].className += " active";
-			  captionText.innerHTML = dots[slideIndex-1].alt;
-			}
-		</script>
-		<!--
-		This ends the picture slide show.
-		-->
-		
-		  
+	  
 		<div class="formSection">
 			<div class="splitLine">
 				  <label for="variety"><b>Plant Variety</b></label>	

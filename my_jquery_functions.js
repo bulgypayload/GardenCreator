@@ -8,6 +8,7 @@ var plotCount;
 var pixelsPerFoot = 24; 
 var gridHeight;
 var gridWidth;
+var slideIndex = 0;
 
 var requestURL = 'garden2.json';
  var request = new XMLHttpRequest();
@@ -17,6 +18,7 @@ var requestURL = 'garden2.json';
   request.send();
   request.onload = function(){
     myGarden = request.response;
+    myPictures = myGarden['myPictures'];
 	myButtons = myGarden['button'];
 	myPlots = myGarden['plot'];
 	myPlants = myGarden['plant']; 
@@ -25,6 +27,8 @@ var requestURL = 'garden2.json';
 	gridHeight = myGarden.settings.gridHeight;
 	gridWidth = myGarden.settings.gridWidth;
 //---------------------------------------------------------------------------------------------------test
+
+
 
 $(document).ready(function(){
   //Creates a tool tips-------------------------------
@@ -35,6 +39,7 @@ makeDroppable("#grid");
 
 //Populate the grid when document ready
 populateGrid();
+addPicturesToModal();
 
 // Get the current date and put in format MM/DD/YYYY
 var fullDate = new Date();
@@ -128,7 +133,8 @@ $("#addPlot").click(function(){
 //Add plant button click
 $("#addPlant").click(function(){
 	document.getElementById('id01').style.display='block';
-  //var plantTitle = prompt("Please enter a variety name.");
+     
+ //var plantTitle = prompt("Please enter a variety name.");
   /*if(plantTitle != null)
   {
 	var newButton = {
@@ -230,6 +236,53 @@ function deleteSelected() {
 
 });}//end document ready function
 
+//Slid Show controls
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("demo");
+    var captionText = document.getElementById("caption");
+    if (n > slides.length) {slideIndex = 0}
+        if (n < 0) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex].style.display = "block";
+    dots[slideIndex].className += " active";
+    captionText.innerHTML = dots[slideIndex].alt;
+}//end of slideshow functions
+
+function addPicturesToModal() {
+    // body...
+    for( var i = 0; i < myPictures.length; i++)
+    {       
+        $("#idMySlideShow").append("<div class=mySlides><img src="+ myPictures[i].source + "></div>");    
+        $("#myRow").append("<div class=column><img class=demo cursor src="
+            + myPictures[i].source 
+            +" style=width:100% onclick=currentSlide("
+            +i
+            +") alt="
+            + myPictures[i].alt + " ></div>");
+        console.log(myPictures[i].alt);
+    }
+
+    showSlides(slideIndex);
+    
+}//end createAddPictures to plant form
+
 //Populate the grid Function-------------------------------------------------------------------------
 function populateGrid()
 {  
@@ -257,7 +310,8 @@ function populateGrid()
 //add a button and the click event function test
  function createButton(buttonObj){
 	// Add the button to the html doc
-    $("#toolBar").append("<button id=add"+ buttonObj.id + " class=addButton style=background-Image:url(" + buttonObj.backgroundImage +")></button>");
+    $("#toolBar").append("<button id=add"+ buttonObj.id + " class=addButton style=background-Image:url(" 
+    + buttonObj.backgroundImage +")></button>");
 
 	// Get the current date and put in format MM/DD/YYYY
 	var fullDate = new Date();
@@ -314,7 +368,8 @@ function createStuff( gardenObject){
 //Create the plotsObject
 function createPlot(gardenObject) {
     // body...
-    $("#grid").prepend("<div id="+ gardenObject.id +" class=plot title=plot><div class=plotWidthLabel widthLabel></div><div class=plotHeightLabel heightLabel></div></div>");
+    $("#grid").prepend("<div id="+ gardenObject.id 
+        +" class=plot title=plot><div class=plotWidthLabel widthLabel></div><div class=plotHeightLabel heightLabel></div></div>");
     $(".plotWidthLabel").addClass("widthLabel");
     $(".plotHeightLabel").addClass("heightLabel");
     // Start of experimental backgroundImage
@@ -375,13 +430,18 @@ function createPlant(gardenObject){
     var lblPlantSpacing = (gardenObject.minWidth/pixelsPerFoot).toFixed(2);
 
     if(lblWidth >= 12){
-          $("#" + gardenObject.id + " > div.plantWidthLabel").text(gardenObject.title + " "+ lblWidth + "ft" 
-                +" (Plant " + lblPlantSpacing + "ft / " 
-                +" Row " + lblRowSpacing + "ft)" );
+        $("#" + gardenObject.id + " > div.plantWidthLabel").text(gardenObject.title + " "+ lblWidth + "ft" 
+            +" (Plant " + lblPlantSpacing + "ft / " 
+            +" Row " + lblRowSpacing + "ft)" );
         }
-        else {
+        else if(lblWidth >=5) {
           $("#" + gardenObject.id + " > div.plantWidthLabel").text(gardenObject.title + " "+ lblWidth + "ft");
         }
+        else
+        {
+            $("#" + gardenObject.id + " > div.plantWidthLabel").text(lblWidth + "ft");
+        }
+
         if(lblHeight >=1)
         {
           $("#" + gardenObject.id + " > div.plantHeightLabel").text(lblHeight + " ft");
@@ -433,40 +493,51 @@ function makeResizable( gardenObject )
 {
     var classType = gardenObject.classType; 
 
-  if(classType === "plot"){
+    if(classType === "plot")
+    {
+        makePlotResizable(gardenObject);
+    }
+    else if(classType === "plant" || classType ==="plantJ")
+    {	
+        makePlantResizable(gardenObject);
+    }
+}//end makeResizable
+
+function makePlotResizable( gardenObject )
+{
     $("#" + gardenObject.id).resizable({
       minHeight: 60,
       minWidth: 60,
       resize: function( event, ui){
         var width = (ui.size.width/pixelsPerFoot).toFixed(2);
         var height = (ui.size.height/pixelsPerFoot).toFixed(2);
-		gardenObject.width = ui.size.width;
-		gardenObject.height = ui.size.height; 
+        gardenObject.width = ui.size.width;
+        gardenObject.height = ui.size.height; 
         ui.element.children(".plotWidthLabel").text(width + " ft");
         ui.element.children(".plotHeightLabel").text(height + " ft");
       }
     });
-  }
-  else if(classType === "plant" || classType ==="plantJ")
-  {	
-  console.log("Resizeable Garden: " + gardenObject.title + ", Height: " + gardenObject.minHeight + ", Width: " + gardenObject.minWidth);
+}
+
+function makePlantResizable( gardenObject ) {
+    
     $("#" + gardenObject.id).resizable({
       minHeight: gardenObject.minHeight,
       minWidth: gardenObject.minWidth,
       grid: [gardenObject.minWidth, gardenObject.minHeight],
-      resize: function( event, ui){	  
+      resize: function( event, ui){   
         var width = (ui.size.width/pixelsPerFoot).toFixed(2);
         var height = (ui.size.height/pixelsPerFoot).toFixed(2);
-		var lblRowSpacing = (gardenObject.minHeight/pixelsPerFoot).toFixed(2);
-		var lblPlantSpacing = (gardenObject.minWidth/pixelsPerFoot).toFixed(2);
+        var lblRowSpacing = (gardenObject.minHeight/pixelsPerFoot).toFixed(2);
+        var lblPlantSpacing = (gardenObject.minWidth/pixelsPerFoot).toFixed(2);
 
-		gardenObject.width = ui.size.width; 
-		gardenObject.height = ui.size.height; 
+        gardenObject.width = ui.size.width; 
+        gardenObject.height = ui.size.height; 
 
         if(width >= 12){
           ui.element.children(".plantWidthLabel").text(gardenObject.title + " " + width + "ft"
-		      +" (Plant " + lblPlantSpacing + "ft / "		   
-		      +" Row " + lblRowSpacing + "ft)" );
+              +" (Plant " + lblPlantSpacing + "ft / "          
+              +" Row " + lblRowSpacing + "ft)" );
         }
         else if(width >=5 ){
           ui.element.children(".plantWidthLabel").text(gardenObject.title + " " + width + "ft ");
@@ -484,8 +555,7 @@ function makeResizable( gardenObject )
         }
       }
     });
-  }
-}//end makeResizable
+}
 
 //Make item droppable------------------------------
 function makeDroppable( classType, gardenObject ){
