@@ -106,7 +106,6 @@ $("#saveGarden").click(function(){
     a.download = 'garden2.json';
     a.dispatchEvent(new MouseEvent(`click`, {bubbles: false, cancelable: true, view: window}));
 	console.log('Saved');
-	console.log(string);
 });
 
 // //ButtonClicks createStuff(class, Label, backgroundImage)
@@ -127,7 +126,7 @@ $("#addPlot").click(function(){
   };
   plotCount++; 
   createStuff(plotObject);
-  myGarden.plot.push(plotObject);  
+  myPlots.push(plotObject);  
 });
 
 //Add plant button click
@@ -420,7 +419,7 @@ function createPlant(gardenObject){
     });
 
     //$("#" + gardenObject.id).css("background-size", gardenObject.minWidth +"px "+ gardenObject.minHeight+"px");
-    makeResizable( gardenObject );
+    makeResizable( gardenObject );    
     makeDraggable( gardenObject );
     createToolTip( gardenObject );
 
