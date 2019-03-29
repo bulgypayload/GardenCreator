@@ -32,7 +32,7 @@ var requestURL = 'garden2.json';
 
 $(document).ready(function(){
   //Creates a tool tips-------------------------------
-$( document).tooltip();
+//$( document).tooltip();
 
 //Make the grid dropable so the plot and plants can be dropped
 makeDroppable("#grid");
@@ -77,7 +77,6 @@ var grid = "#grid";
 var plant = ".plant";
 var plot = ".plot";
 var plantNumber = 0;
-
 //-----------------------------old place of myGarden-----------------------------------------------test
 
 //This is the save button onclick function. 
@@ -308,8 +307,8 @@ function populateGrid()
 
 //add a button and the click event function test
  function createButton(buttonObj){
-	// Add the button to the html doc
-    $("#toolBar").append("<button id=add"+ buttonObj.id + " class=addButton style=background-Image:url(" 
+	// Add the button to the html doc TODO add the title to the buttons create method
+    $("#toolBar").append("<button id=add"+ buttonObj.id + " title="+ buttonObj.id +" class=addButton style=background-Image:url(" 
     + buttonObj.backgroundImage +")></button>");
 
 	// Get the current date and put in format MM/DD/YYYY
