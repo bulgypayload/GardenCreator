@@ -1,8 +1,8 @@
 {
   "settings": {
-    "plantCount": 108,
+    "plantCount": 111,
     "plotCount": 26,
-    "buttonCount": 1,
+    "buttonCount": 3,
     "gridHeight": 971,
     "gridWidth": 1988
   },
@@ -46,6 +46,10 @@
     {
       "source": "pictures/cucumber.png",
       "alt": "Cucumbers"
+    },
+    {
+      "source": "pictures/plant.jpg",
+      "alt": "Plant"
     }
   ],
   "button": [
@@ -191,6 +195,28 @@
       "objCreateMinHeight": 24,
       "objCreateWidth": 24,
       "objCreateHeight": 24
+    },
+    {
+      "id": "button1",
+      "class": "addButton",
+      "backgroundImage": "pictures/mushroom.png",
+      "title": "Mushrooms",
+      "daysToHarvest": 55,
+      "objCreateMinWidth": 48,
+      "objCreateMinHeight": 48,
+      "objCreateWidth": 48,
+      "objCreateHeight": 48
+    },
+    {
+      "id": "button2",
+      "class": "addButton",
+      "backgroundImage": "pictures/plant.jpg",
+      "title": "Plant",
+      "daysToHarvest": 55,
+      "objCreateMinWidth": 50,
+      "objCreateMinHeight": 50,
+      "objCreateWidth": 50,
+      "objCreateHeight": 50
     }
   ],
   "plot": [
@@ -202,8 +228,8 @@
       "backgroundImage": "pictures/ground.jpg",
       "title": "Plot 25",
       "zIndex": "2",
-      "top": 109,
-      "left": 280,
+      "top": 60,
+      "left": 188,
       "height": 360,
       "width": 560,
       "moistureLevel": "20%"
@@ -353,24 +379,6 @@
       "daysToHarvest": 75,
       "datePlanted": "3/29/2019",
       "harvestDate": "6/13/2019"
-    },
-    {
-      "id": "plant105",
-      "parentId": "grid",
-      "classType": "plant",
-      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
-      "backgroundImage": "pictures/potato.png",
-      "zIndex": "3",
-      "title": "Potato",
-      "top": 234,
-      "left": 74,
-      "height": 96,
-      "width": 144,
-      "minWidth": 48,
-      "minHeight": 48,
-      "daysToHarvest": 60,
-      "datePlanted": "3/29/2019",
-      "harvestDate": "5/28/2019"
     },
     {
       "id": "plant107",

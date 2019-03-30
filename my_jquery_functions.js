@@ -10,6 +10,7 @@ var pixelsPerFoot = 24;
 var gridHeight;
 var gridWidth;
 var slideIndex = 0;
+var modalPicNumber=0;
 
 var requestURL = 'garden2.json';
  var request = new XMLHttpRequest();
@@ -93,6 +94,7 @@ $("#saveGarden").click(function(){
 	//saves the application variables to the global Garden object. 
 	myGarden.plant = myPlants;
 	myGarden.plot = myPlots; 
+    myGarden.myPictures = myPictures;
 	myGarden.settings.plantCount = plantCount; 
 	myGarden.settings.plotCount = plotCount; 
     myGarden.settings.buttonCount = buttonCount;
@@ -246,20 +248,27 @@ function showSlides(n) {
 
 function addPicturesToModal() {
     // body...
-    for( var i = 0; i < myPictures.length; i++)
+    for( var i = modalPicNumber; i < myPictures.length; i++)
     {       
-        $("#idMySlideShow").append("<div class=mySlides><img src="+ myPictures[i].source + "></div>");    
-        $("#myRow").append("<div class=column><img class=demo cursor src="
-            + myPictures[i].source 
-            +" style=width:100% onclick=currentSlide("
-            +i
-            +") alt="
-            + myPictures[i].alt + " ></div>");
+        addPictureToModal(myPictures[i].source, myPictures[i].alt, i)
+        modalPicNumber++;
     }
 
     showSlides(slideIndex);
     
 }//end createAddPictures to plant form
+
+//Add single picture to modal
+function addPictureToModal(pictureSource, altTag, i)
+{
+    $("#idMySlideShow").append("<div class=mySlides><img src="+ pictureSource + "></div>");    
+        $("#myRow").append("<div class=column><img class=demo cursor src="
+            + pictureSource 
+            +" style=width:100% onclick=currentSlide("
+            +i
+            +") alt="
+            + altTag + " ></div>");
+}
 
 //Populate the grid Function-------------------------------------------------------------------------
 function populateGrid()
@@ -287,19 +296,28 @@ function populateGrid()
 function createPlantButton()
 {
     if(isFilledOut()){
+        var x = document.getElementById("picInput");
+
     var myNewPlant = {
-        id: "button" + buttonCount,
-        class: "addButton",
-        backgroundImage: $("#picInput").val(),
-        title: $("#variety").val(),
-        daysToHarvest: $("#daysToHarvest").val()*1,
-        objCreateMinWidth: $("#plantSpacing").val() * 2,
-        objCreateMinHeight: $("#rowSpacing").val() * 2,
-        objCreateWidth: $("#rowSpacing").val() * 2,
-        objCreateHeight: $("#plantSpacing").val() * 2
+            id: "button" + buttonCount,
+            class: "addButton",
+            backgroundImage: "pictures/" + x.files[0].name,
+            title: $("#variety").val(),
+            daysToHarvest: $("#daysToHarvest").val()*1,
+            objCreateMinWidth: $("#plantSpacing").val() * 2,
+            objCreateMinHeight: $("#rowSpacing").val() * 2,
+            objCreateWidth: $("#rowSpacing").val() * 2,
+            objCreateHeight: $("#plantSpacing").val() * 2
+        };
+
+    var picture = {
+            source: myNewPlant.backgroundImage,
+            alt: myNewPlant.title
         };
         clearModalInput();
-        document.getElementById('id01').style.display='none';    
+        document.getElementById('id01').style.display='none'; 
+        myPictures.push(picture); 
+        addPictureToModal(picture.source, picture.alt, modalPicNumber);  
         myButtons.push(myNewPlant);
         createButton(myNewPlant);
         buttonCount++;
@@ -309,6 +327,7 @@ function createPlantButton()
     }
 }
 
+//Clears the input fields 
 function clearModalInput()
 {
     $("#variety").val("");
@@ -321,6 +340,7 @@ function clearModalInput()
     $("#plantSpacing").val("");
 }
 
+//Check if the input fields are completed if not send alert message
 function isFilledOut()
 {
     var check = true; 
