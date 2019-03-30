@@ -1,6 +1,5 @@
 # GardenCreator
 Web interface that would control and monitor a home garden.
-The idea behind this project is to host a site/interface on a raspberry pi apache server and be able to plan a garden to scale, control/monitor watering, temperature, moisture level, and crop statistics.  
-Many gardeners may not have consistent internet connectivity and would benefit from a stand alone device that could be accessed over a home router.  
+The idea behind this project is to host a site on a raspberry pi apache server. The user should be able to plan a garden to scale, control/monitor watering(pumps), temperature, moisture level, and crop statistics.  Because the interface is accessed over a home router it would beneficial to users with non-existent or intermittent web connectivity.   
 
 ![alt text](pictures/interfaceExample.JPG)
