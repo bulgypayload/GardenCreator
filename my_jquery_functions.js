@@ -130,26 +130,7 @@ $("#addPlot").click(function(){
 
 //Add plant button click
 $("#addPlant").click(function(){
-	document.getElementById('id01').style.display='block';
-     
- //var plantTitle = prompt("Please enter a variety name.");
-  /*if(plantTitle != null)
-  {
-	var newButton = {
-	  id: plantTitle,
-      class: "addButton",
-      backgroundImage: "pictures/tomato2.png",
-	  title: plantTitle,
-      objCreateMinWidth: 50,
-      objCreateMinHeight: 60,
-      objCreateWidth: "50px",
-      objCreateHeight: "60px"
-	  }
-	  createButton(newButton); 
-  }
-  else {
-    alert("You must enter a name to create a plant.")
-  }*/
+	document.getElementById('id01').style.display='block'; 
  });
 
 //Increase width or height function-------------------------------------
@@ -192,11 +173,7 @@ $(document).keyup(function(e){
   if(e.which === 46)
   {
 	deleteSelected();
-  }
-	//myPlants = myPlants.filter(function(x) { return true }); 
-	//myPlants = myPlants.filter(function(x) { return true });
-	//myPlots = myPlots.filter(function(x) { return true }); 
-	//myPlots = myPlots.filter(function(x) { return true });
+  }	
 });
 
 //Deletes the selected elements
@@ -274,7 +251,6 @@ function addPicturesToModal() {
             +i
             +") alt="
             + myPictures[i].alt + " ></div>");
-        console.log(myPictures[i].alt);
     }
 
     showSlides(slideIndex);
@@ -308,7 +284,7 @@ function populateGrid()
 //add a button and the click event function test
  function createButton(buttonObj){
 	// Add the button to the html doc TODO add the title to the buttons create method
-    $("#toolBar").append("<button id=add"+ buttonObj.id + " title="+ buttonObj.id +" class=addButton style=background-Image:url(" 
+    $("#toolBar").append("<button id=add"+ buttonObj.id + " title="+ buttonObj.title +" class=addButton style=background-Image:url(" 
     + buttonObj.backgroundImage +")></button>");
 
 	// Get the current date and put in format MM/DD/YYYY
@@ -326,20 +302,31 @@ function populateGrid()
           class: "plant small ui-resizable ui-draggable ui-draggable-handle",
           backgroundImage : buttonObj.backgroundImage,
           zIndex : "3",
-          title: buttonObj.id,
+          title: buttonObj.title,
           top: 20,
           left: 100,
           height: buttonObj.objCreateHeight,
           width: buttonObj.objCreateWidth,
           minWidth: buttonObj.objCreateMinWidth,
           minHeight: buttonObj.objCreateMinHeight,
+          daysToHarvest: buttonObj.daysToHarvest,
           datePlanted : todaysDate,
-          harvestDate : "12/15/18"		   
+          harvestDate : calculateHarvestDate(fullDate, buttonObj.daysToHarvest)		   
 	  };
 	  myPlants.push(gardenObject);
       createStuff(gardenObject)
 	  plantCount++; 
     });	
+ }
+
+ function calculateHarvestDate(plantDate, daysToHarvest)
+ {
+    var returnDate = new Date(
+        plantDate.getFullYear(),
+        plantDate.getMonth()+1,
+        plantDate.getDate() + daysToHarvest);    
+
+    return returnDate.getMonth() + "/" + returnDate.getDate() + "/" + returnDate.getFullYear();
  }
 
 //Create stuff with areguments classType, title backgroundImage, itemSize, datePlanted, dateHarvest and moistureLevel
@@ -367,7 +354,8 @@ function createStuff( gardenObject){
 function createPlot(gardenObject) {
     // body...
     $("#grid").prepend("<div id="+ gardenObject.id 
-        +" class=plot title=plot><div class=plotWidthLabel widthLabel></div><div class=plotHeightLabel heightLabel></div></div>");
+        +" class=plot title=plot><div class=plotWidthLabel widthLabel></div>"
+        +"<div class=plotHeightLabel heightLabel></div></div>");
     $(".plotWidthLabel").addClass("widthLabel");
     $(".plotHeightLabel").addClass("heightLabel");
     // Start of experimental backgroundImage
@@ -392,11 +380,11 @@ function createPlot(gardenObject) {
 //Creates a plant object
 function createPlant(gardenObject){
     //Create the garden object by finding the parent and prepending to the html
-    $("#" + gardenObject.parentId).prepend("<div id="+ gardenObject.id+" class=plantJ title=plant>"
-    + "<div class=plantWidthLabel></div>"
-    + "<div class=plantHeightLabel></div>"
-    +"<div id="+ gardenObject.id +"picture class=plantJ title=plant>"
-    +"</div>");
+    $("#" + gardenObject.parentId).prepend("<div id="+ gardenObject.id+" class=plantJ title="+gardenObject.title+">"
+        + "<div class=plantWidthLabel></div>"
+        + "<div class=plantHeightLabel></div>"
+        +"<div id="+ gardenObject.id +"picture class=plantJ title="+ gardenObject.title +">"
+        +"</div>");
     $(".plantWidthLabel").addClass("widthLabel");
     $(".plantHeightLabel").addClass("heightLabel");     
 
@@ -702,14 +690,15 @@ function createPlotTooltipString(plot, gardenObject) {
 //creates the plant tool tip html
 function createPlantTooltipString(gardenObject) {
     return "<b>" + gardenObject.title
-                   + "<br>Planted:</b> "+ gardenObject.datePlanted
-                   +"<br><b>Harvest:</b>" + gardenObject.harvestDate 
-                   +"<br><b>Plant Spacing:</b> " + (gardenObject.minWidth/pixelsPerFoot).toFixed(2) 
-                   +" ft<br><b>Row Spacing:</b> " + (gardenObject.minHeight/pixelsPerFoot).toFixed(2)
-                   +" ft<br><b># of Plants:</b> " + ((gardenObject.height/gardenObject.minHeight) * (gardenObject.width/ gardenObject.minWidth))
+                   +"<br>Planted: </b>"+ gardenObject.datePlanted
+                   +"<br><b>Harvest in: </b>"+ gardenObject.daysToHarvest + " days"
+                   +"<br><b>Harvest date: </b>" + gardenObject.harvestDate 
+                   +"<br><b>Plant Spacing: </b>" + (gardenObject.minWidth/pixelsPerFoot).toFixed(2) 
+                   +" ft<br><b>Row Spacing: </b>" + (gardenObject.minHeight/pixelsPerFoot).toFixed(2)
+                   +" ft<br><b># of Plants: </b>" + ((gardenObject.height/gardenObject.minHeight) * (gardenObject.width/ gardenObject.minWidth))
                    +"<br><b>Rows: </b>" +  (gardenObject.height/ gardenObject.minHeight)
                    +"<br><b>Plants per row: </b>" +  (gardenObject.width/ gardenObject.minWidth)
-                   +"<br><button class=editButton>Edit</button>";
+                   +"<br><button class=editButton onclick=document.getElementById('id01').style.display='block';>Edit</button>";
 }
 
 //Function that disable the tooltip based on classType class or id
