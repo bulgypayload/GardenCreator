@@ -5,6 +5,7 @@ var myPlots;
 var myPlants; 
 var plantCount;
 var plotCount;
+var buttonCount;
 var pixelsPerFoot = 24; 
 var gridHeight;
 var gridWidth;
@@ -24,6 +25,7 @@ var requestURL = 'garden2.json';
 	myPlants = myGarden['plant']; 
     plantCount = myGarden.settings.plantCount;
 	plotCount = myGarden.settings.plotCount; 
+    buttonCount = myGarden.settings.buttonCount;
 	gridHeight = myGarden.settings.gridHeight;
 	gridWidth = myGarden.settings.gridWidth;
 //---------------------------------------------------------------------------------------------------test
@@ -93,8 +95,10 @@ $("#saveGarden").click(function(){
 	myGarden.plot = myPlots; 
 	myGarden.settings.plantCount = plantCount; 
 	myGarden.settings.plotCount = plotCount; 
+    myGarden.settings.buttonCount = buttonCount;
 	myGarden.settings.gridWidth = gridWidth;
 	myGarden.settings.gridHeight = gridHeight;
+    myGarden.button = myButtons;
 	console.log(myGarden);
 	
 	//filters the array for undefined values. 	
@@ -279,14 +283,75 @@ function populateGrid()
     }     
 }//end populate grid function
 
+//buttonAdd function for the plant from the modal
+function createPlantButton()
+{
+    if(isFilledOut()){
+    var myNewPlant = {
+        id: "button" + buttonCount,
+        class: "addButton",
+        backgroundImage: $("#picInput").val(),
+        title: $("#variety").val(),
+        daysToHarvest: $("#daysToHarvest").val()*1,
+        objCreateMinWidth: $("#plantSpacing").val() * 2,
+        objCreateMinHeight: $("#rowSpacing").val() * 2,
+        objCreateWidth: $("#rowSpacing").val() * 2,
+        objCreateHeight: $("#plantSpacing").val() * 2
+        };
+        clearModalInput();
+        document.getElementById('id01').style.display='none';    
+        myButtons.push(myNewPlant);
+        createButton(myNewPlant);
+        buttonCount++;
+    }
+    else{
+        alert("Please fill out all fields.");
+    }
+}
 
+function clearModalInput()
+{
+    $("#variety").val("");
+    $("#picInput").val("");
+    $("#variety").val("");
+    $("#daysToHarvest").val("");
+    $("#plantSpacing").val("");
+    $("#rowSpacing").val("");
+    $("#rowSpacing").val("");
+    $("#plantSpacing").val("");
+}
+
+function isFilledOut()
+{
+    var check = true; 
+
+    var inputField = new Array($("#variety").val(),
+    $("#picInput").val(),
+    $("#variety").val(),
+    $("#daysToHarvest").val(),
+    $("#plantSpacing").val(),
+    $("#rowSpacing").val(),
+    $("#rowSpacing").val(),
+    $("#plantSpacing").val());
+
+    for(var i =0; i < inputField.length; i++)
+    {
+        if(inputField[i] === "" || inputField[i] === null)
+        {
+            check = false;
+            break; 
+        }
+    };
+    return check; 
+}
 
 //add a button and the click event function test
  function createButton(buttonObj){
 	// Add the button to the html doc TODO add the title to the buttons create method
-    $("#toolBar").append("<button id=add"+ buttonObj.id + " title="+ buttonObj.title +" class=addButton style=background-Image:url(" 
-    + buttonObj.backgroundImage +")></button>");
-
+    $("#toolBar").append("<button id="+ buttonObj.id + " title="
+        + buttonObj.title +" class=addButton style=background-Image:url("
+        + buttonObj.backgroundImage +")></button>");
+    
 	// Get the current date and put in format MM/DD/YYYY
 	var fullDate = new Date();
 	var month = ((fullDate.getMonth().length+1) === 1)? '0' + (fullDate.getMonth()+1) : (fullDate.getMonth()+1);
@@ -294,7 +359,7 @@ function populateGrid()
 
 	
     //Give the button a click event that calls createStuff to create a plant
-    $("#add"+buttonObj.id).click(function(){	 
+    $("#"+buttonObj.id).click(function(){	 
       var gardenObject = {
           id : "plant" + plantCount,
 		  parentId : "grid",

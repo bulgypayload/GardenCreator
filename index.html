@@ -60,7 +60,7 @@
 		 <div class="formSection">
 			<div class="splitLine">
 				<input id="variety" type="text" placeholder="Tomato, Watermelon, Green Beans...." name="variety" required>
-				<input id="daysToHarvest" type="text" placeholder="Days to expected harvest" name="daysToHarvest" required>
+				<input id="daysToHarvest" type="number" placeholder="Days to expected harvest" name="daysToHarvest" required>
 			</div>
 		 </div>
 
@@ -73,8 +73,8 @@
 		 
 		 <div class="formSection">
 			 <div class="splitLine">
-				  <input type="text" placeholder="Plant spacing in inches" name="rowSpacing" required>
-				  <input type="text" placeholder="Row spacing in inches" name="plantSpacing" required>
+				  <input id="rowSpacing" type="number" placeholder="Plant spacing in inches" name="rowSpacing" required>
+				  <input id="plantSpacing" type="number" placeholder="Row spacing in inches" name="plantSpacing" required>
 			  </div>
 		 </div>
 		 		 
@@ -91,7 +91,7 @@
 		 </div>
 		<div class="formSection">
 			<div class="splitLine">
-			  <button id="buttonAdd" type="submit">Add</button>
+			  <button id="buttonAdd" type="button" onclick="createPlantButton()">Add</button>
 			  <button id="buttonCancel"type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
 			</div>
 		</div>
