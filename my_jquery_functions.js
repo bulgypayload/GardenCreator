@@ -319,7 +319,8 @@ function createPlantButton()
         clearModalInput();
         document.getElementById('id01').style.display='none'; 
         myPictures.push(picture); 
-        addPictureToModal(picture.source, picture.alt, modalPicNumber);  
+        addPictureToModal(picture.source, picture.alt, modalPicNumber);
+        modalPicNumber++;  
         myButtons.push(myNewPlant);
         createButton(myNewPlant);
         buttonCount++;

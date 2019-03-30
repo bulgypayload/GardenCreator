@@ -1,8 +1,8 @@
 {
   "settings": {
-    "plantCount": 111,
-    "plotCount": 26,
-    "buttonCount": 3,
+    "plantCount": 117,
+    "plotCount": 27,
+    "buttonCount": 9,
     "gridHeight": 971,
     "gridWidth": 1988
   },
@@ -24,32 +24,40 @@
       "alt": "Chicken Coop"
     },
     {
-      "source": "pictures/lettuce.png",
-      "alt": "Lettuce"
-    },
-    {
       "source": "pictures/corn.png",
       "alt": "Corn"
-    },
-    {
-      "source": "pictures/mushroom2.png",
-      "alt": "Mushrooms"
     },
     {
       "source": "pictures/bellPepper.png",
       "alt": "Bell Peppers"
     },
     {
-      "source": "pictures/potato.png",
-      "alt": "Potatos"
-    },
-    {
       "source": "pictures/cucumber.png",
       "alt": "Cucumbers"
     },
     {
-      "source": "pictures/plant.jpg",
-      "alt": "Plant"
+      "source": "pictures/mushroom.png",
+      "alt": "Mushroom"
+    },
+    {
+      "source": "pictures/potato.png",
+      "alt": "Potato"
+    },
+    {
+      "source": "pictures/lettuce.png",
+      "alt": "Lettuce"
+    },
+    {
+      "source": "pictures/blueBerry.png",
+      "alt": "BlueBerry"
+    },
+    {
+      "source": "pictures/mushroom.png",
+      "alt": "Mushroom"
+    },
+    {
+      "source": "pictures/mushroom2.png",
+      "alt": "Mushroom"
     }
   ],
   "button": [
@@ -63,17 +71,6 @@
       "objCreateMinHeight": 60,
       "objCreateWidth": 196,
       "objCreateHeight": 60
-    },
-    {
-      "id": "BlueBerry",
-      "class": "addButton",
-      "backgroundImage": "pictures/blueBerry.png",
-      "title": "Blue Berry",
-      "daysToHarvest": 50,
-      "objCreateMinWidth": 72,
-      "objCreateMinHeight": 96,
-      "objCreateWidth": 72,
-      "objCreateHeight": 96
     },
     {
       "id": "Tomato-Cherry",
@@ -175,48 +172,59 @@
       "objCreateHeight": 72
     },
     {
-      "id": "Potato",
+      "id": "button4",
       "class": "addButton",
       "backgroundImage": "pictures/potato.png",
       "title": "Potato",
-      "daysToHarvest": 60,
+      "daysToHarvest": 55,
       "objCreateMinWidth": 48,
       "objCreateMinHeight": 48,
       "objCreateWidth": 48,
       "objCreateHeight": 48
     },
     {
-      "id": "button0",
+      "id": "button5",
       "class": "addButton",
       "backgroundImage": "pictures/lettuce.png",
       "title": "Lettuce",
       "daysToHarvest": 55,
-      "objCreateMinWidth": 24,
-      "objCreateMinHeight": 24,
-      "objCreateWidth": 24,
-      "objCreateHeight": 24
-    },
-    {
-      "id": "button1",
-      "class": "addButton",
-      "backgroundImage": "pictures/mushroom.png",
-      "title": "Mushrooms",
-      "daysToHarvest": 55,
       "objCreateMinWidth": 48,
       "objCreateMinHeight": 48,
       "objCreateWidth": 48,
       "objCreateHeight": 48
     },
     {
-      "id": "button2",
+      "id": "button6",
       "class": "addButton",
-      "backgroundImage": "pictures/plant.jpg",
-      "title": "Plant",
+      "backgroundImage": "pictures/blueBerry.png",
+      "title": "BlueBerry",
+      "daysToHarvest": 48,
+      "objCreateMinWidth": 48,
+      "objCreateMinHeight": 48,
+      "objCreateWidth": 48,
+      "objCreateHeight": 48
+    },
+    {
+      "id": "button7",
+      "class": "addButton",
+      "backgroundImage": "pictures/mushroom.png",
+      "title": "Mushroom",
       "daysToHarvest": 55,
       "objCreateMinWidth": 50,
       "objCreateMinHeight": 50,
       "objCreateWidth": 50,
       "objCreateHeight": 50
+    },
+    {
+      "id": "button8",
+      "class": "addButton",
+      "backgroundImage": "pictures/mushroom2.png",
+      "title": "Mushroom",
+      "daysToHarvest": 56,
+      "objCreateMinWidth": 48,
+      "objCreateMinHeight": 48,
+      "objCreateWidth": 48,
+      "objCreateHeight": 48
     }
   ],
   "plot": [
@@ -228,10 +236,24 @@
       "backgroundImage": "pictures/ground.jpg",
       "title": "Plot 25",
       "zIndex": "2",
-      "top": 60,
-      "left": 188,
+      "top": 24,
+      "left": 175,
       "height": 360,
       "width": 560,
+      "moistureLevel": "20%"
+    },
+    {
+      "id": "plot26",
+      "parentId": "grid",
+      "classType": "plot",
+      "class": "plot ui-resizable ui-draggable ui-draggable-handle ui-droppable",
+      "backgroundImage": "pictures/ground.jpg",
+      "title": "Plot 26",
+      "zIndex": "2",
+      "top": 416,
+      "left": 169,
+      "height": 208,
+      "width": 557,
       "moistureLevel": "20%"
     }
   ],
@@ -381,19 +403,73 @@
       "harvestDate": "6/13/2019"
     },
     {
-      "id": "plant107",
-      "parentId": "plot25",
+      "id": "plant113",
+      "parentId": "plot26",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/mushroom.png",
+      "zIndex": "3",
+      "title": "Mushroom",
+      "top": 16,
+      "left": 28,
+      "height": 50,
+      "width": 500,
+      "minWidth": 50,
+      "minHeight": 50,
+      "daysToHarvest": 55,
+      "datePlanted": "3/30/2019",
+      "harvestDate": "5/24/2019"
+    },
+    {
+      "id": "plant114",
+      "parentId": "plot26",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/mushroom2.png",
+      "zIndex": "3",
+      "title": "Mushroom",
+      "top": 83,
+      "left": 21,
+      "height": 48,
+      "width": 528,
+      "minWidth": 48,
+      "minHeight": 48,
+      "daysToHarvest": 56,
+      "datePlanted": "3/30/2019",
+      "harvestDate": "5/25/2019"
+    },
+    {
+      "id": "plant115",
+      "parentId": "plot26",
       "classType": "plant",
       "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
       "backgroundImage": "pictures/lettuce.png",
       "zIndex": "3",
       "title": "Lettuce",
-      "top": 205,
-      "left": 20,
-      "height": 72,
-      "width": 48,
-      "minWidth": 24,
-      "minHeight": 24,
+      "top": 150,
+      "left": 22,
+      "height": 48,
+      "width": 240,
+      "minWidth": 48,
+      "minHeight": 48,
+      "daysToHarvest": 55,
+      "datePlanted": "3/30/2019",
+      "harvestDate": "5/24/2019"
+    },
+    {
+      "id": "plant116",
+      "parentId": "plot26",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/potato.png",
+      "zIndex": "3",
+      "title": "Potato",
+      "top": 143,
+      "left": 299,
+      "height": 48,
+      "width": 240,
+      "minWidth": 48,
+      "minHeight": 48,
       "daysToHarvest": 55,
       "datePlanted": "3/30/2019",
       "harvestDate": "5/24/2019"
