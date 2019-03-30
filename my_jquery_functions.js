@@ -1,3 +1,5 @@
+//Author: Kyle Platou
+
 //this is the my_jquery_test.js file code to see if it works in this file. 
 var myGarden;  
 var myButtons;
