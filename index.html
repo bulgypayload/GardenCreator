@@ -52,17 +52,25 @@
 		  <div id="myRow" class="row"></div>
 		</div> 
 	  
+
 		<div class="formSection">
 			<div class="splitLine">
 				  <label for="variety"><b>Plant Variety</b></label>	
+				  <input id="variety" type="text" placeholder="Tomato, Watermelon, Green Beans...." name="variety" required>
+			 </div>
+		 </div>
+
+		<div class="formSection">
+			<div class="splitLine">
+				  <label for="myDatePlanted"><b>Date Planted</b></label>	
 				  <label for="daysToHarvest"><b>Days to Harvest</b></label>
 			 </div>
 		 </div>
 		 
 		 <div class="formSection">
-			<div class="splitLine">
-				<input id="variety" type="text" placeholder="Tomato, Watermelon, Green Beans...." name="variety" required>
-				<input id="daysToHarvest" type="number" placeholder="Days to expected harvest" name="daysToHarvest" required>
+			<div class="splitLine">	
+				<input id="myDatePlanted" type="date" name="myDatePlanted" value="2019-4-19">	
+				<input id="daysToHarvest" type="number" placeholder="Days to harvest" name="daysToHarvest" required>
 			</div>
 		 </div>
 
@@ -86,13 +94,12 @@
 		</div>
 
 		<div class="formSection"> 
-			<div class="splitLine">
-				  <input id="picInput" type="file" name="backImage" required accept="image/*">
+			<div class="splitLine"><!-- input "require" taken out-->				  <input id="picInput" type="file" name="backImage" accept="image/*">
 			</div>
 		 </div>
 		<div class="formSection">
 			<div class="splitLine">
-			  <button id="buttonAdd" type="button" onclick="createPlantButton()">Add</button>
+			  <button id="buttonAdd" type="button" onclick="createNewButton()">Add</button>
 			  <button id="buttonCancel"type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
 			</div>
 		</div>

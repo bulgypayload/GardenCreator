@@ -45,11 +45,12 @@ makeDroppable("#grid");
 //Populate the grid when document ready
 populateGrid();
 addPicturesToModal();
+//$("#datePicker").datepicker();
 
 // Get the current date and put in format MM/DD/YYYY
-var fullDate = new Date();
-var month = ((fullDate.getMonth().length+1) === 1)? '0' + (fullDate.getMonth()+1) : (fullDate.getMonth()+1);
-var todaysDate = month + "/" + fullDate.getDate() + "/" + fullDate.getFullYear();
+//var fullDate = new Date();
+//var month = ((fullDate.getMonth().length+1) === 1)? '0' + (fullDate.getMonth()+1) : (fullDate.getMonth()+1);
+//var todaysDate = month + "/" + fullDate.getDate() + "/" + fullDate.getFullYear();
 
 //On window resize change Min width of grid
 $(window).resize(function(){
@@ -102,8 +103,7 @@ $("#saveGarden").click(function(){
     myGarden.settings.buttonCount = buttonCount;
 	myGarden.settings.gridWidth = gridWidth;
 	myGarden.settings.gridHeight = gridHeight;
-    myGarden.button = myButtons;
-	console.log(myGarden);
+    myGarden.button = myButtons;	
 	
 	//filters the array for undefined values. 	
     var  string = JSON.stringify(myGarden, null, 2);
@@ -233,6 +233,7 @@ function showSlides(n) {
     var slides = document.getElementsByClassName("mySlides");
     var dots = document.getElementsByClassName("demo");
     var captionText = document.getElementById("caption");
+    var pictureSource = document.getElementById("picInput");
     if (n > slides.length) {slideIndex = 0}
         if (n < 0) {
             slideIndex = slides.length
@@ -245,9 +246,11 @@ function showSlides(n) {
     }
     slides[slideIndex].style.display = "block";
     dots[slideIndex].className += " active";
-    captionText.innerHTML = dots[slideIndex].alt;
+    captionText.innerHTML = dots[slideIndex].alt;  
+
 }//end of slideshow functions
 
+//Iterates throught the JSON myPictures array to add the thumbnail and slideshow pictures
 function addPicturesToModal() {
     // body...
     for( var i = modalPicNumber; i < myPictures.length; i++)
@@ -260,7 +263,7 @@ function addPicturesToModal() {
     
 }//end createAddPictures to plant form
 
-//Add single picture to modal
+//Adds a single picture to modal
 function addPictureToModal(pictureSource, altTag, i)
 {
     $("#idMySlideShow").append("<div class=mySlides><img src="+ pictureSource + "></div>");    
@@ -295,38 +298,68 @@ function populateGrid()
 }//end populate grid function
 
 //buttonAdd function for the plant from the modal
-function createPlantButton()
+function createNewButton()
 {
-    if(isFilledOut()){
-        var x = document.getElementById("picInput");
 
+    if(isFilledOut()){    
     var myNewPlant = {
             id: "button" + buttonCount,
             class: "addButton",
-            backgroundImage: "pictures/" + x.files[0].name,
+            backgroundImage: getSelectedBackgroundImage(),
             title: $("#variety").val(),
+            datePlanted: document.getElementById("myDatePlanted").valueAsDate,
             daysToHarvest: $("#daysToHarvest").val()*1,
             objCreateMinWidth: $("#plantSpacing").val() * 2,
             objCreateMinHeight: $("#rowSpacing").val() * 2,
-            objCreateWidth: $("#rowSpacing").val() * 2,
-            objCreateHeight: $("#plantSpacing").val() * 2
-        };
+            objCreateWidth: $("#plantSpacing").val() * 2,
+            objCreateHeight: $("#rowSpacing").val() * 2
+        };          
 
-    var picture = {
-            source: myNewPlant.backgroundImage,
-            alt: myNewPlant.title
-        };
-        clearModalInput();
-        document.getElementById('id01').style.display='none'; 
-        myPictures.push(picture); 
-        addPictureToModal(picture.source, picture.alt, modalPicNumber);
-        modalPicNumber++;  
-        myButtons.push(myNewPlant);
         createButton(myNewPlant);
+        clearModalInput();
+        document.getElementById('id01').style.display='none';           
+        myButtons.push(myNewPlant);        
         buttonCount++;
     }
     else{
         alert("Please fill out all fields.");
+    }
+}
+
+//Add picture to myPictures and to modal
+function checkMyPictures(myNewPlant)
+{
+    var pictureExists = false; 
+
+    for(var i = 0; i < myPictures.length; i++)
+    {
+        if(myPicture[i].source === myNewPlant.backgroundImage)
+        {
+            pictureExits = true; 
+            break;
+        }
+    }
+    if(!pictureExists)
+    {
+        var picture = {source: myNewPlant.backgroundImage, alt: myNewPlant.title};
+
+        myPictures.push(picture); 
+        addPictureToModal(picture.source, picture.alt, modalPicNumber);
+        modalPicNumber++;
+    }
+}
+
+//Set bockground image to file selection or to default value based on picture selected.
+function getSelectedBackgroundImage()
+{
+    var pictureSelected = document.getElementById("picInput");    
+
+    if(pictureSelected.files[0] === undefined)
+    {        
+        return $("img.active").attr('src'); 
+    }
+    else{
+        return "pictures/" + pictureSelected.files[0].name 
     }
 }
 
@@ -336,6 +369,7 @@ function clearModalInput()
     $("#variety").val("");
     $("#picInput").val("");
     $("#variety").val("");
+    //$("#myDatePlanted").val("");
     $("#daysToHarvest").val("");
     $("#plantSpacing").val("");
     $("#rowSpacing").val("");
@@ -349,8 +383,8 @@ function isFilledOut()
     var check = true; 
 
     var inputField = new Array($("#variety").val(),
-    $("#picInput").val(),
-    $("#variety").val(),
+    //$("#picInput").val(),
+    $("#myDatePlanted").val(),
     $("#daysToHarvest").val(),
     $("#plantSpacing").val(),
     $("#rowSpacing").val(),
@@ -375,10 +409,15 @@ function isFilledOut()
         + buttonObj.title +" class=addButton style=background-Image:url("
         + buttonObj.backgroundImage +")></button>");
     
-	// Get the current date and put in format MM/DD/YYYY
-	var fullDate = new Date();
-	var month = ((fullDate.getMonth().length+1) === 1)? '0' + (fullDate.getMonth()+1) : (fullDate.getMonth()+1);
-	var todaysDate = month + "/" + fullDate.getDate() + "/" + fullDate.getFullYear();
+	// Get the current date and put in format MM/DD/YYYY    
+	var createDatePlanted = new Date(buttonObj.datePlanted);
+	var month = (createDatePlanted.getUTCMonth()+1);//((fullDate.getMonth().length+1) === 1)? '0' + (fullDate.getMonth()+1) : (fullDate.getMonth()+1);
+	var myDate = month + "/" + createDatePlanted.getUTCDate() + "/" + createDatePlanted.getUTCFullYear();
+
+    console.log(createDatePlanted);
+    console.log(createDatePlanted.getUTCDate());
+    console.log(createDatePlanted.getUTCMonth()+1);
+    console.log(createDatePlanted.getUTCFullYear());
 
 	
     //Give the button a click event that calls createStuff to create a plant
@@ -398,8 +437,8 @@ function isFilledOut()
           minWidth: buttonObj.objCreateMinWidth,
           minHeight: buttonObj.objCreateMinHeight,
           daysToHarvest: buttonObj.daysToHarvest,
-          datePlanted : todaysDate,
-          harvestDate : calculateHarvestDate(fullDate, buttonObj.daysToHarvest)		   
+          datePlanted : myDate,
+          harvestDate : calculateHarvestDate(createDatePlanted, buttonObj.daysToHarvest)		   
 	  };
 	  myPlants.push(gardenObject);
       createStuff(gardenObject)
@@ -408,13 +447,13 @@ function isFilledOut()
  }
 
  function calculateHarvestDate(plantDate, daysToHarvest)
- {
+ {   
     var returnDate = new Date(
-        plantDate.getFullYear(),
-        plantDate.getMonth()+1,
-        plantDate.getDate() + daysToHarvest);    
+        plantDate.getUTCFullYear(),
+        plantDate.getUTCMonth()+1,
+        plantDate.getUTCDate() + daysToHarvest);    
 
-    return returnDate.getMonth() + "/" + returnDate.getDate() + "/" + returnDate.getFullYear();
+    return returnDate.getUTCMonth() + "/" + returnDate.getUTCDate() + "/" + returnDate.getUTCFullYear();
  }
 
 //Create stuff with areguments classType, title backgroundImage, itemSize, datePlanted, dateHarvest and moistureLevel
