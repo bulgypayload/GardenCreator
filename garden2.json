@@ -1,8 +1,8 @@
 {
   "settings": {
-    "plantCount": 11,
+    "plantCount": 16,
     "plotCount": 1,
-    "buttonCount": 9,
+    "buttonCount": 13,
     "gridHeight": 1200,
     "gridWidth": 1988
   },
@@ -54,6 +54,14 @@
     {
       "source": "pictures/mushroom2.png",
       "alt": "Mushroom"
+    },
+    {
+      "source": "pictures/tomato2.png",
+      "alt": "BlackBerry"
+    },
+    {
+      "source": "pictures/greenBeans.jpg",
+      "alt": "Hello"
     }
   ],
   "button": [
@@ -152,6 +160,54 @@
       "objCreateMinHeight": 48,
       "objCreateWidth": 48,
       "objCreateHeight": 48
+    },
+    {
+      "id": "button9",
+      "class": "addButton",
+      "backgroundImage": "pictures/StrawBerry.png",
+      "title": "StrawBerry",
+      "datePlanted": "2019-04-24T00:00:00.000Z",
+      "daysToHarvest": 60,
+      "objCreateMinWidth": 48,
+      "objCreateMinHeight": 48,
+      "objCreateWidth": 48,
+      "objCreateHeight": 48
+    },
+    {
+      "id": "button10",
+      "class": "addButton",
+      "backgroundImage": "pictures/potato.png",
+      "title": "Hello",
+      "datePlanted": "2019-05-01T00:00:00.000Z",
+      "daysToHarvest": 5,
+      "objCreateMinWidth": 48,
+      "objCreateMinHeight": 48,
+      "objCreateWidth": 48,
+      "objCreateHeight": 48
+    },
+    {
+      "id": "button11",
+      "class": "addButton",
+      "backgroundImage": "pictures/tomato2.png",
+      "title": "BlackBerry",
+      "datePlanted": "2019-04-01T00:00:00.000Z",
+      "daysToHarvest": 50,
+      "objCreateMinWidth": 48,
+      "objCreateMinHeight": 48,
+      "objCreateWidth": 48,
+      "objCreateHeight": 48
+    },
+    {
+      "id": "button12",
+      "class": "addButton",
+      "backgroundImage": "pictures/greenBeans.jpg",
+      "title": "Hello",
+      "datePlanted": "2019-04-01T00:00:00.000Z",
+      "daysToHarvest": 45,
+      "objCreateMinWidth": 48,
+      "objCreateMinHeight": 48,
+      "objCreateWidth": 48,
+      "objCreateHeight": 48
     }
   ],
   "plot": [
@@ -163,8 +219,8 @@
       "backgroundImage": "pictures/ground.jpg",
       "title": "Plot 0",
       "zIndex": "2",
-      "top": 42,
-      "left": 200,
+      "top": 69,
+      "left": 174,
       "height": 416,
       "width": 560,
       "moistureLevel": "20%"

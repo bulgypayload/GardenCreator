@@ -314,11 +314,13 @@ function createNewButton()
             objCreateWidth: $("#plantSpacing").val() * 2,
             objCreateHeight: $("#rowSpacing").val() * 2
         };          
-
+        
+        
         createButton(myNewPlant);
+        checkMyPictures(myNewPlant);         
+        myButtons.push(myNewPlant);  
         clearModalInput();
-        document.getElementById('id01').style.display='none';           
-        myButtons.push(myNewPlant);        
+        document.getElementById('id01').style.display='none';        
         buttonCount++;
     }
     else{
@@ -333,13 +335,13 @@ function checkMyPictures(myNewPlant)
 
     for(var i = 0; i < myPictures.length; i++)
     {
-        if(myPicture[i].source === myNewPlant.backgroundImage)
+        if(myPictures[i].source === myNewPlant.backgroundImage)
         {
-            pictureExits = true; 
+            pictureExists = true; 
             break;
         }
     }
-    if(!pictureExists)
+    if(pictureExists === false)
     {
         var picture = {source: myNewPlant.backgroundImage, alt: myNewPlant.title};
 
