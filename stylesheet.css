@@ -382,3 +382,33 @@ margin:auto;
 End Image slide show css. 
 //
 */
+
+/* Context Menu*/
+.menu {
+  width: 120px;
+  background-color: #ffff;
+  box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  display: none;
+  left: 0;
+  top: 0;
+}
+
+  .menu-options {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+  }
+
+    .menu-option {
+      font-size: 14px;
+      padding: 5px 5px 5px 5px;
+      cursor: pointer;
+      height: 50%;
+      margin: auto;
+    }
+
+  .menu-option:hover {
+    background: green;
+    color: white;
+  } 

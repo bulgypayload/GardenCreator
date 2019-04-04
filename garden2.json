@@ -150,18 +150,6 @@
       "objCreateHeight": 48
     },
     {
-      "id": "button8",
-      "class": "addButton",
-      "backgroundImage": "pictures/potato.png",
-      "title": "Potato",
-      "datePlanted": "2019-04-01T00:00:00.000Z",
-      "daysToHarvest": 45,
-      "objCreateMinWidth": 48,
-      "objCreateMinHeight": 48,
-      "objCreateWidth": 48,
-      "objCreateHeight": 48
-    },
-    {
       "id": "button9",
       "class": "addButton",
       "backgroundImage": "pictures/StrawBerry.png",
@@ -192,18 +180,6 @@
       "title": "BlackBerry",
       "datePlanted": "2019-04-01T00:00:00.000Z",
       "daysToHarvest": 50,
-      "objCreateMinWidth": 48,
-      "objCreateMinHeight": 48,
-      "objCreateWidth": 48,
-      "objCreateHeight": 48
-    },
-    {
-      "id": "button12",
-      "class": "addButton",
-      "backgroundImage": "pictures/greenBeans.jpg",
-      "title": "Hello",
-      "datePlanted": "2019-04-01T00:00:00.000Z",
-      "daysToHarvest": 45,
       "objCreateMinWidth": 48,
       "objCreateMinHeight": 48,
       "objCreateWidth": 48,

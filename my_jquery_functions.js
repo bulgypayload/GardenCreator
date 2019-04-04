@@ -13,6 +13,7 @@ var gridHeight;
 var gridWidth;
 var slideIndex = 0;
 var modalPicNumber=0;
+let menuVisible = false;
 
 var requestURL = 'garden2.json';
  var request = new XMLHttpRequest();
@@ -38,6 +39,8 @@ var requestURL = 'garden2.json';
 $(document).ready(function(){
   //Creates a tool tips-------------------------------
 //$( document).tooltip();
+//Context menu
+
 
 //Make the grid dropable so the plot and plants can be dropped
 makeDroppable("#grid");
@@ -219,6 +222,19 @@ function deleteSelected() {
 
 });}//end document ready function
 
+function deleteButton(buttonId)
+{
+    for(var i = 0; i < myButtons.length; i++)
+    {
+        if(myButtons[i].id === buttonId)
+        {
+            $("#" + buttonId).remove(); 
+            delete myButtons[i];
+        }
+    }
+    myButtons = myButtons.filter(function(x) { return true });    
+}
+
 //Slid Show controls
 function plusSlides(n) {
     showSlides(slideIndex += n);
@@ -313,9 +329,8 @@ function createNewButton()
             objCreateMinHeight: $("#rowSpacing").val() * 2,
             objCreateWidth: $("#plantSpacing").val() * 2,
             objCreateHeight: $("#rowSpacing").val() * 2
-        };          
-        
-        
+        };  
+
         createButton(myNewPlant);
         checkMyPictures(myNewPlant);         
         myButtons.push(myNewPlant);  
@@ -404,6 +419,30 @@ function isFilledOut()
     return check; 
 }
 
+const toggleMenu = command => {
+    if(command === "show"){
+        $(".menu").css("display", "block");
+    }
+    else{
+        $(".menu").css("display", "none");
+    }
+  menuVisible = !menuVisible;
+};
+
+const setPosition = ({ top, left }) => {
+  $(".menu").css({
+    top: top,
+    left: left 
+    });
+
+  toggleMenu("show");
+};
+
+window.addEventListener("click", e => {
+  if(menuVisible)toggleMenu("hide");
+});
+//End context menu
+
 //add a button and the click event function test
  function createButton(buttonObj){
 	// Add the button to the html doc TODO add the title to the buttons create method
@@ -421,7 +460,22 @@ function isFilledOut()
     console.log(createDatePlanted.getUTCMonth()+1);
     console.log(createDatePlanted.getUTCFullYear());
 
-	
+    //context menu
+    $("#"+ buttonObj.id).contextmenu(buttonObj.id, e => {
+        e.preventDefault();
+        const origin = {
+            left: e.pageX,
+            top: e.pageY
+            };        
+        setPosition(origin);
+        //Use this to edit the button $("#menuEdit").onclick();
+        $("#menuDelete").click(function(){
+            //$("#"+ buttonObj.id).remove();
+            deleteButton(buttonObj.id);
+        });
+        return false;
+    });
+
     //Give the button a click event that calls createStuff to create a plant
     $("#"+buttonObj.id).click(function(){	 
       var gardenObject = {
@@ -456,7 +510,7 @@ function isFilledOut()
         plantDate.getUTCDate() + daysToHarvest);    
 
     return returnDate.getUTCMonth() + "/" + returnDate.getUTCDate() + "/" + returnDate.getUTCFullYear();
- }
+ } 
 
 //Create stuff with areguments classType, title backgroundImage, itemSize, datePlanted, dateHarvest and moistureLevel
 function createStuff( gardenObject){
@@ -841,3 +895,4 @@ function enableToolTip(classType)
 {
   $(classType).tooltip("option", "disabled", false);
 }
+
