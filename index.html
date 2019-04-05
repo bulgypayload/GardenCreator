@@ -113,6 +113,57 @@
 
 </div> <!--This is the end of the popup form-->
 
+<!-- The Modal -->
+<div id="id02" class="modal">
+  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close">&times;</span>
+
+ <!-- Modal Content -->
+  <form class="modal-content animate" >
+		
+		<div class="formSection">
+			<div class="splitLine">
+				  <label for="variety2"><b>Plant Variety</b></label>	
+				  <input id="variety2" type="text" placeholder="Tomato, Watermelon, Green Beans...." name="variety2" required>
+			 </div>
+		 </div>
+
+		<div class="formSection">
+			<div class="splitLine">
+				  <label for="myDatePlanted2"><b>Date Planted</b></label>	
+				  <label for="daysToHarvest2"><b>Days to Harvest</b></label>
+			 </div>
+		 </div>
+		 
+		 <div class="formSection">
+			<div class="splitLine">	
+				<input id="myDatePlanted2" type="date" name="myDatePlanted2" value="2019-4-19">	
+				<input id="daysToHarvest2" type="number" placeholder="Days to harvest" name="daysToHarvest2" required>
+			</div>
+		 </div>
+
+		 <div class="formSection">
+			 <div class="splitLine">
+				  <label for="rowSpacing2"><b>Row Spacing</b></label>	  
+				  <label for="plantSpacing2"><b>Plant Spacing</b></label>
+			  </div>
+		 </div>
+		 
+		 <div class="formSection">
+			 <div class="splitLine">
+				  <input id="rowSpacing2" type="number" placeholder="Plant spacing in inches" name="rowSpacing2" required>
+				  <input id="plantSpacing2" type="number" placeholder="Row spacing in inches" name="plantSpacing2" required>
+			  </div>
+		 </div>
+		 		
+		<div class="formSection">
+			<div class="splitLine">
+			  <button id="buttonSave" type="button" onclick="saveEditClick()">Save</button>
+			  <button id="buttonCancel"type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+			</div>
+		</div>
+  </form>
+
+</div> <!--This is the end of the popup form-->
 
 <div id="container">
 	<div id="grid">

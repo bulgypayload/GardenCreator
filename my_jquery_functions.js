@@ -14,6 +14,7 @@ var gridWidth;
 var slideIndex = 0;
 var modalPicNumber=0;
 let menuVisible = false;
+var editObject; 
 
 var requestURL = 'garden2.json';
  var request = new XMLHttpRequest();
@@ -455,11 +456,6 @@ window.addEventListener("click", e => {
 	var month = (createDatePlanted.getUTCMonth()+1);//((fullDate.getMonth().length+1) === 1)? '0' + (fullDate.getMonth()+1) : (fullDate.getMonth()+1);
 	var myDate = month + "/" + createDatePlanted.getUTCDate() + "/" + createDatePlanted.getUTCFullYear();
 
-    console.log(createDatePlanted);
-    console.log(createDatePlanted.getUTCDate());
-    console.log(createDatePlanted.getUTCMonth()+1);
-    console.log(createDatePlanted.getUTCFullYear());
-
     //context menu
     $("#"+ buttonObj.id).contextmenu(buttonObj.id, e => {
         e.preventDefault();
@@ -881,7 +877,29 @@ function createPlantTooltipString(gardenObject) {
                    +" ft<br><b># of Plants: </b>" + ((gardenObject.height/gardenObject.minHeight) * (gardenObject.width/ gardenObject.minWidth))
                    +"<br><b>Rows: </b>" +  (gardenObject.height/ gardenObject.minHeight)
                    +"<br><b>Plants per row: </b>" +  (gardenObject.width/ gardenObject.minWidth)
-                   +"<br><button class=editButton onclick=document.getElementById('id01').style.display='block';>Edit</button>";
+                   +"<br><button class=editButton onclick=editButtonClick('"+gardenObject.id+"')>Edit</button>";
+}
+
+function editButtonClick(objectId)
+{
+	document.getElementById('id02').style.display='block';
+	editObjectId = objectId; 
+
+}
+function saveEditClick()
+{
+	for(var i = 0; i < myPlants.length; i++)
+	{
+		if(myPlants[i].id === editObjectId)
+		{
+			myPlants[i].title = $("#variety2");
+			myPlants[i].minWidth = $("#plantSpacing2").val() *2;
+			myPlants[i].minHeight = $("#rowSpacing2").val() * 2; 
+			myPlants[i].daysToHarvest = $("#daysToHarvest2").val() * 1;	
+			myPlants[i].datePlanted = $("#myDatePlanted2").valueAsDate;		
+		}
+	}
+	document.getElementById('id02').style.display='none';
 }
 
 //Function that disable the tooltip based on classType class or id
@@ -895,4 +913,6 @@ function enableToolTip(classType)
 {
   $(classType).tooltip("option", "disabled", false);
 }
+
+
 
