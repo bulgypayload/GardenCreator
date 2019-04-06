@@ -1,6 +1,6 @@
 {
   "settings": {
-    "plantCount": 27,
+    "plantCount": 29,
     "plotCount": 1,
     "buttonCount": 14,
     "gridHeight": 1200,
@@ -288,24 +288,6 @@
       "harvestDate": "05/15/2019"
     },
     {
-      "id": "plant2",
-      "parentId": "plot0",
-      "classType": "plant",
-      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
-      "backgroundImage": "pictures/pepper.png",
-      "zIndex": "3",
-      "title": "Jalapeno",
-      "top": 108,
-      "left": 123,
-      "height": 48,
-      "width": 432,
-      "minWidth": 48,
-      "minHeight": 48,
-      "daysToHarvest": 1,
-      "datePlanted": "10/15/2019",
-      "harvestDate": "10/16/2019"
-    },
-    {
       "id": "plant4",
       "parentId": "plot0",
       "classType": "plant",
@@ -313,15 +295,33 @@
       "backgroundImage": "pictures/tomato2.png",
       "zIndex": "3",
       "title": "Cherry Tomato",
-      "top": 21,
-      "left": 123,
-      "height": 48,
-      "width": 432,
+      "top": -1,
+      "left": 80,
+      "height": 72,
+      "width": 480,
       "minWidth": 48,
-      "minHeight": 48,
+      "minHeight": 72,
       "daysToHarvest": 10,
       "datePlanted": "01/04/1970",
       "harvestDate": "01/14/1970"
+    },
+    {
+      "id": "plant2",
+      "parentId": "plot0",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/pepper.png",
+      "zIndex": "3",
+      "title": "Jalapeno",
+      "top": 89,
+      "left": 79,
+      "height": 72,
+      "width": 480,
+      "minWidth": 48,
+      "minHeight": 72,
+      "daysToHarvest": 1,
+      "datePlanted": "10/15/2019",
+      "harvestDate": "10/16/2019"
     }
   ]
 }

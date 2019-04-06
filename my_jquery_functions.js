@@ -946,7 +946,9 @@ function saveEditClick()
     newPlant.minHeight = $("#rowSpacing2").val() * 2,
     newPlant.daysToHarvest = $("#daysToHarvest2").val() *1;
     newPlant.datePlanted  = myDate;
-    newPlant.harvestDate  = calculateHarvestDate(createDatePlanted, $("#daysToHarvest2").val() *1);          
+    newPlant.harvestDate  = calculateHarvestDate(createDatePlanted, $("#daysToHarvest2").val() *1); 
+
+    newPlant = heightWidthMakeAMultiple(newPlant); 
         
     myPlants.push(newPlant);
     createStuff(newPlant)
@@ -957,6 +959,17 @@ function saveEditClick()
     $("#plantSpacing2").val("");
     $("#rowSpacing2").val(""); 
     $("#daysToHarvest2").val("");
+}
+
+//Changes the height and width to be a multiple of the minHeight minWidth
+function heightWidthMakeAMultiple(changedPlant)
+{
+    var plant = changedPlant;
+
+    plant.height = (plant.height/ plant.minHeight) > 0 ? Math.round(plant.height / plant.minHeight) * plant.minHeight : plant.minHeight; 
+    plant.width = (plant.width/ plant.minWidth) > 0 ? Math.round(plant.width / plant.minWidth) * plant.minWidth : plant.minWidth; 
+
+    return plant;   
 }
 
 //Function that disable the tooltip based on classType class or id

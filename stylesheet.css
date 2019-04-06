@@ -231,6 +231,12 @@ left: 30%;
 .formSection input, .formSection button{
 	height: 30px;
 }
+
+#variety, #variety2{
+  width:80%;
+  margin:auto;
+}
+
 #picInput{
 	width:65%;
 }
