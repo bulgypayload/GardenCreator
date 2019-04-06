@@ -1,8 +1,8 @@
 {
   "settings": {
-    "plantCount": 16,
+    "plantCount": 27,
     "plotCount": 1,
-    "buttonCount": 13,
+    "buttonCount": 14,
     "gridHeight": 1200,
     "gridWidth": 1988
   },
@@ -184,6 +184,18 @@
       "objCreateMinHeight": 48,
       "objCreateWidth": 48,
       "objCreateHeight": 48
+    },
+    {
+      "id": "button13",
+      "class": "addButton",
+      "backgroundImage": "pictures/greenBeans.jpg",
+      "title": "GreenBeans3",
+      "datePlanted": "2019-04-12T00:00:00.000Z",
+      "daysToHarvest": 60,
+      "objCreateMinWidth": 48,
+      "objCreateMinHeight": 48,
+      "objCreateWidth": 48,
+      "objCreateHeight": 48
     }
   ],
   "plot": [
@@ -204,60 +216,6 @@
   ],
   "plant": [
     {
-      "id": "plant1",
-      "parentId": "plot0",
-      "classType": "plant",
-      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
-      "backgroundImage": "pictures/corn.png",
-      "zIndex": "3",
-      "title": "Okra",
-      "top": 26,
-      "left": 145,
-      "height": 48,
-      "width": 384,
-      "minWidth": 48,
-      "minHeight": 48,
-      "daysToHarvest": 55,
-      "datePlanted": "6/1/2019",
-      "harvestDate": "7/25/2019"
-    },
-    {
-      "id": "plant2",
-      "parentId": "plot0",
-      "classType": "plant",
-      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
-      "backgroundImage": "pictures/pepper.png",
-      "zIndex": "3",
-      "title": "Jalapeno",
-      "top": 111,
-      "left": 120,
-      "height": 48,
-      "width": 192,
-      "minWidth": 48,
-      "minHeight": 48,
-      "daysToHarvest": 1,
-      "datePlanted": "5/31/2019",
-      "harvestDate": "6/2/2019"
-    },
-    {
-      "id": "plant4",
-      "parentId": "plot0",
-      "classType": "plant",
-      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
-      "backgroundImage": "pictures/tomato2.png",
-      "zIndex": "3",
-      "title": "Cherry Tomato",
-      "top": 111,
-      "left": 344,
-      "height": 48,
-      "width": 192,
-      "minWidth": 48,
-      "minHeight": 48,
-      "daysToHarvest": 10,
-      "datePlanted": "4/1/2019",
-      "harvestDate": "4/11/2019"
-    },
-    {
       "id": "plant7",
       "parentId": "plot0",
       "classType": "plant",
@@ -265,15 +223,15 @@
       "backgroundImage": "pictures/tomato2.png",
       "zIndex": "3",
       "title": "Tomato",
-      "top": 198,
-      "left": 122,
+      "top": 191,
+      "left": 123,
       "height": 48,
       "width": 192,
       "minWidth": 48,
       "minHeight": 48,
       "daysToHarvest": 6,
-      "datePlanted": "3/1/2019",
-      "harvestDate": "3/7/2019"
+      "datePlanted": "03/01/2019",
+      "harvestDate": "03/07/2019"
     },
     {
       "id": "plant8",
@@ -283,15 +241,15 @@
       "backgroundImage": "pictures/bellPepper.png",
       "zIndex": "3",
       "title": "Bell Pepper",
-      "top": 198,
-      "left": 352,
+      "top": 192,
+      "left": 358,
       "height": 48,
       "width": 192,
       "minWidth": 48,
       "minHeight": 48,
       "daysToHarvest": 60,
-      "datePlanted": "4/2/2019",
-      "harvestDate": "6/1/2019"
+      "datePlanted": "04/02/2019",
+      "harvestDate": "06/01/2019"
     },
     {
       "id": "plant9",
@@ -301,15 +259,15 @@
       "backgroundImage": "pictures/lettuce.png",
       "zIndex": "3",
       "title": "Lettuce",
-      "top": 275,
-      "left": 157,
+      "top": 270,
+      "left": 124,
       "height": 48,
-      "width": 384,
+      "width": 432,
       "minWidth": 48,
       "minHeight": 48,
       "daysToHarvest": 30,
-      "datePlanted": "4/1/2019",
-      "harvestDate": "4/31/2019"
+      "datePlanted": "04/01/2019",
+      "harvestDate": "04/31/2019"
     },
     {
       "id": "plant10",
@@ -320,14 +278,50 @@
       "zIndex": "3",
       "title": "Potato",
       "top": 352,
-      "left": 151,
+      "left": 128,
       "height": 48,
-      "width": 384,
+      "width": 432,
       "minWidth": 48,
       "minHeight": 48,
       "daysToHarvest": 45,
-      "datePlanted": "4/1/2019",
-      "harvestDate": "5/15/2019"
+      "datePlanted": "04/01/2019",
+      "harvestDate": "05/15/2019"
+    },
+    {
+      "id": "plant2",
+      "parentId": "plot0",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/pepper.png",
+      "zIndex": "3",
+      "title": "Jalapeno",
+      "top": 108,
+      "left": 123,
+      "height": 48,
+      "width": 432,
+      "minWidth": 48,
+      "minHeight": 48,
+      "daysToHarvest": 1,
+      "datePlanted": "10/15/2019",
+      "harvestDate": "10/16/2019"
+    },
+    {
+      "id": "plant4",
+      "parentId": "plot0",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/tomato2.png",
+      "zIndex": "3",
+      "title": "Cherry Tomato",
+      "top": 21,
+      "left": 123,
+      "height": 48,
+      "width": 432,
+      "minWidth": 48,
+      "minHeight": 48,
+      "daysToHarvest": 10,
+      "datePlanted": "01/04/1970",
+      "harvestDate": "01/14/1970"
     }
   ]
 }

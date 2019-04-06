@@ -450,11 +450,12 @@ window.addEventListener("click", e => {
     $("#toolBar").append("<button id="+ buttonObj.id + " title="
         + buttonObj.title +" class=addButton style=background-Image:url("
         + buttonObj.backgroundImage +")></button>");
-    
+    	  
 	// Get the current date and put in format MM/DD/YYYY    
-	var createDatePlanted = new Date(buttonObj.datePlanted);
-	var month = (createDatePlanted.getUTCMonth()+1);//((fullDate.getMonth().length+1) === 1)? '0' + (fullDate.getMonth()+1) : (fullDate.getMonth()+1);
-	var myDate = month + "/" + createDatePlanted.getUTCDate() + "/" + createDatePlanted.getUTCFullYear();
+    var createDatePlanted = new Date(buttonObj.datePlanted);
+    var month = ((createDatePlanted.getUTCMonth() + 1) < 10) ? "0" + (createDatePlanted.getUTCMonth() + 1) : createDatePlanted.getUTCMonth() + 1;
+    var day = (createDatePlanted.getUTCDate() < 10) ? "0" + createDatePlanted.getUTCDate() : createDatePlanted.getUTCDate();
+    var myDate = month + "/" + day + "/" + createDatePlanted.getUTCFullYear();
 
     //context menu
     $("#"+ buttonObj.id).contextmenu(buttonObj.id, e => {
@@ -502,10 +503,13 @@ window.addEventListener("click", e => {
  {   
     var returnDate = new Date(
         plantDate.getUTCFullYear(),
-        plantDate.getUTCMonth()+1,
-        plantDate.getUTCDate() + daysToHarvest);    
+        plantDate.getUTCMonth(),
+        plantDate.getUTCDate() + daysToHarvest);  
 
-    return returnDate.getUTCMonth() + "/" + returnDate.getUTCDate() + "/" + returnDate.getUTCFullYear();
+    var month =((returnDate.getUTCMonth() + 1) < 10) ? "0" + (returnDate.getUTCMonth() + 1) : returnDate.getUTCMonth() + 1;
+    var day = (returnDate.getUTCDate() < 10) ? "0" + returnDate.getUTCDate() : returnDate.getUTCDate();
+
+    return month + "/" + day + "/" + returnDate.getUTCFullYear();
  } 
 
 //Create stuff with areguments classType, title backgroundImage, itemSize, datePlanted, dateHarvest and moistureLevel
@@ -883,23 +887,76 @@ function createPlantTooltipString(gardenObject) {
 function editButtonClick(objectId)
 {
 	document.getElementById('id02').style.display='block';
-	editObjectId = objectId; 
+	editObjectId = objectId;
 
+    for(var i = 0; i < myPlants.length; i++)
+    {
+        if(myPlants[i].id === editObjectId)
+        {
+
+            var regexMonth = /\/[0-9]+\//;
+            var regexDay = /[0-9]+\//;
+            var regexYear = /\/[0-9]+$/;
+            var regexAnyNumber = /[0-9]+/; 
+
+            var myDatePlanted = myPlants[i].datePlanted;
+            var month = myDatePlanted.match(regexMonth); 
+            var day = myDatePlanted.match(regexDay);
+            var year = myDatePlanted.match(regexYear);
+
+                         
+
+            document.getElementById("myDatePlanted2").value = year[0].match(regexAnyNumber).toString() + "-" 
+                + day[0].match(regexAnyNumber).toString() + "-"
+                + month[0].match(regexAnyNumber).toString();
+
+            $("#variety2").val(myPlants[i].title);
+            $("#daysToHarvest2").val(myPlants[i].daysToHarvest);  
+            $("#plantSpacing2").val(myPlants[i].minWidth / 2);
+            $("#rowSpacing2").val(myPlants[i].minHeight / 2);            
+        }
+    }
 }
+
 function saveEditClick()
 {
+    var newPlant; 
+
 	for(var i = 0; i < myPlants.length; i++)
 	{
 		if(myPlants[i].id === editObjectId)
 		{
-			myPlants[i].title = $("#variety2");
-			myPlants[i].minWidth = $("#plantSpacing2").val() *2;
-			myPlants[i].minHeight = $("#rowSpacing2").val() * 2; 
-			myPlants[i].daysToHarvest = $("#daysToHarvest2").val() * 1;	
-			myPlants[i].datePlanted = $("#myDatePlanted2").valueAsDate;		
+			newPlant = myPlants[i]; 
+            $("#" + myPlants[i].id).remove();            
+            delete myPlants[i];
+            myPlants = myPlants.filter(function(x) { return true });             
 		}
 	}
+    
+    // Get the current date and put in format MM/DD/YYYY    
+    var createDatePlanted = new Date(document.getElementById("myDatePlanted2").valueAsDate);
+    var month = ((createDatePlanted.getUTCMonth() + 1) < 10) ? "0" + (createDatePlanted.getUTCMonth() + 1) : createDatePlanted.getUTCMonth() + 1;
+    var day = (createDatePlanted.getUTCDate() < 10) ? "0" + createDatePlanted.getUTCDate() : createDatePlanted.getUTCDate();
+    var myDate = month + "/" + day + "/" + createDatePlanted.getUTCFullYear();
+    
+    console.log(myDate);
+    //backgroundImage : buttonObj.backgroundImage,          
+    newPlant.title = $("#variety2").val();
+    newPlant.minWidth = $("#plantSpacing2").val() * 2;
+    newPlant.minHeight = $("#rowSpacing2").val() * 2,
+    newPlant.daysToHarvest = $("#daysToHarvest2").val() *1;
+    newPlant.datePlanted  = myDate;
+    newPlant.harvestDate  = calculateHarvestDate(createDatePlanted, $("#daysToHarvest2").val() *1);          
+        
+    myPlants.push(newPlant);
+    createStuff(newPlant)
+    plantCount++; 
+
 	document.getElementById('id02').style.display='none';
+    $("#variety2").val("");
+    $("#plantSpacing2").val("");
+    $("#rowSpacing2").val(""); 
+    $("#daysToHarvest2").val("");
 }
 
 //Function that disable the tooltip based on classType class or id
