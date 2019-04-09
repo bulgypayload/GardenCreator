@@ -1,6 +1,6 @@
 {
   "settings": {
-    "plantCount": 29,
+    "plantCount": 30,
     "plotCount": 1,
     "buttonCount": 14,
     "gridHeight": 1200,
@@ -304,6 +304,24 @@
       "daysToHarvest": 1,
       "datePlanted": "10/15/2019",
       "harvestDate": "10/16/2019"
+    },
+    {
+      "id": "plant29",
+      "parentId": "plot0",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/potato.png",
+      "zIndex": "3",
+      "title": "Hello",
+      "top": 348,
+      "left": 102,
+      "height": 48,
+      "width": 432,
+      "minWidth": 48,
+      "minHeight": 48,
+      "daysToHarvest": 5,
+      "datePlanted": "05/01/2019",
+      "harvestDate": "05/06/2019"
     }
   ]
 }

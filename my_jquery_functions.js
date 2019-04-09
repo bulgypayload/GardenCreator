@@ -119,11 +119,17 @@ $("#saveGarden").click(function(){
 function saveToServer(myString)
 {
     var newString = myString; 
-    var xhttp = new XMLHttpRequest();
-    xhttp.open('POST', 'save.php', true);
-    xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    xhttp.overrideMimeType("application/json");  
-    xhttp.send("x=" + newString); 
+    dbParam = newString; 
+xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var txt = this.responseText;    
+    console.log(txt);
+  }
+};
+xmlhttp.open("POST", "save.php", true);
+xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xmlhttp.send("x=" + dbParam);
 }
 
 function saveToLocalJSON(myString)
