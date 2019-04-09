@@ -270,24 +270,6 @@
       "harvestDate": "04/31/2019"
     },
     {
-      "id": "plant10",
-      "parentId": "plot0",
-      "classType": "plant",
-      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
-      "backgroundImage": "pictures/potato.png",
-      "zIndex": "3",
-      "title": "Potato",
-      "top": 352,
-      "left": 128,
-      "height": 48,
-      "width": 432,
-      "minWidth": 48,
-      "minHeight": 48,
-      "daysToHarvest": 45,
-      "datePlanted": "04/01/2019",
-      "harvestDate": "05/15/2019"
-    },
-    {
       "id": "plant4",
       "parentId": "plot0",
       "classType": "plant",

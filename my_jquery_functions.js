@@ -110,18 +110,20 @@ $("#saveGarden").click(function(){
     myGarden.button = myButtons;	
 	
 	//filters the array for undefined values. 	
-    var  string = JSON.stringify(myGarden, null, 2);
-    //To save Locally use saveToLocalJSON method saveToLocalJSON(string); 
-    saveToServer(string);     
+    var  myString = JSON.stringify(myGarden, null, 2);
+    //To save Locally use saveToLocalJSON method saveToLocalJSON(myString); 
+    saveToServer(myString);     
 	
 });
 
 function saveToServer(myString)
 {
+    var newString = myString; 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "garden2.json", true);
-    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhttp.send(myString); 
+    xhttp.open('POST', 'save.php', true);
+    xhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhttp.overrideMimeType("application/json");  
+    xhttp.send("x=" + newString); 
 }
 
 function saveToLocalJSON(myString)
