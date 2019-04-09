@@ -111,13 +111,27 @@ $("#saveGarden").click(function(){
 	
 	//filters the array for undefined values. 	
     var  string = JSON.stringify(myGarden, null, 2);
+    //To save Locally use saveToLocalJSON method saveToLocalJSON(string); 
+    saveToServer(string);     
+	
+});
+
+function saveToServer(myString)
+{
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "garden2.json", true);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send(myString); 
+}
+
+function saveToLocalJSON(myString)
+{
     var a = document.createElement('a');
-    var file = new Blob([string], {type: 'application/json'});
+    var file = new Blob([myString], {type: 'application/json'});
     a.href = URL.createObjectURL(file);
     a.download = 'garden2.json';
     a.dispatchEvent(new MouseEvent(`click`, {bubbles: false, cancelable: true, view: window}));
-	console.log('Saved');
-});
+}
 
 // //ButtonClicks createStuff(class, Label, backgroundImage)
 $("#addPlot").click(function(){
