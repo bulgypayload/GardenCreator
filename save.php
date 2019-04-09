@@ -1,7 +1,7 @@
 <?php   
 header("Content-Type: application/json; charset=UTF-8");
 $json = $_POST["x"]; 
-echo("Saving");
+echo("Saving..");
 echo($json);
    /* sanity check */
    if ($json != null)
@@ -11,5 +11,5 @@ echo($json);
      fclose($file);
      echo("Success");
    }  
-   echo("Done"); 
+   echo("Save"); 
 ?>

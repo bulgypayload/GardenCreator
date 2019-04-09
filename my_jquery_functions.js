@@ -116,22 +116,24 @@ $("#saveGarden").click(function(){
 	
 });
 
+//Function to make post request to save JSON file. 
 function saveToServer(myString)
 {
     var newString = myString; 
     dbParam = newString; 
-xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    var txt = this.responseText;    
-    console.log(txt);
-  }
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var txt = this.responseText;    
+            document.getElementById("saveGarden").innerHTML = txt; 
+        }
 };
-xmlhttp.open("POST", "save.php", true);
-xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-xmlhttp.send("x=" + dbParam);
+    xmlhttp.open("POST", "save.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("x=" + dbParam);
 }
 
+//Allows the json string to be saved to a local file. 
 function saveToLocalJSON(myString)
 {
     var a = document.createElement('a');
