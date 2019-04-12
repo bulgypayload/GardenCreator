@@ -12,6 +12,9 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
+#notification{
+  display:none;  
+}
 
 #toolBar {
   background-image: url("pictures/ground.jpg");

@@ -126,10 +126,12 @@ function saveToServer(myString)
         if (this.readyState == 4 && this.status == 200) {
             var txt = this.responseText;    
              console.log(txt);
-             document.getElementById("saveGarden").innerHTML = "Save";
+             document.getElementById("notification").innerHTML = "Saved";
+             $("#notification").show("fold", 1000);
         }
 };
-    document.getElementById("saveGarden").innerHTML = "Saving..";
+    document.getElementById("notification").innerHTML = "Saving..";
+    $("#notification").show("fold", 1000);
     xmlhttp.open("POST", "save.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("x=" + dbParam);
