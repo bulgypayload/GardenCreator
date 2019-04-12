@@ -475,8 +475,8 @@ window.addEventListener("click", e => {
 //add a button and the click event function test
  function createButton(buttonObj){
 	// Add the button to the html doc TODO add the title to the buttons create method
-    $("#toolBar").append("<button id="+ buttonObj.id + " title="
-        + buttonObj.title +" class=addButton style=background-Image:url("
+    $("#toolBar").append("<button id="+ buttonObj.id + " title=\""
+        + buttonObj.title +"\" class=addButton style=background-Image:url("
         + buttonObj.backgroundImage +")></button>");
     	  
 	// Get the current date and put in format MM/DD/YYYY    
