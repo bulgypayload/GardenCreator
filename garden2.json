@@ -1,8 +1,8 @@
 {
   "settings": {
-    "plantCount": 31,
+    "plantCount": 34,
     "plotCount": 1,
-    "buttonCount": 14,
+    "buttonCount": 15,
     "gridHeight": 2020,
     "gridWidth": 1988
   },
@@ -196,6 +196,18 @@
       "objCreateMinHeight": 48,
       "objCreateWidth": 48,
       "objCreateHeight": 48
+    },
+    {
+      "id": "button14",
+      "class": "addButton",
+      "backgroundImage": "pictures/blueBerry.png",
+      "title": "BlueBerries",
+      "datePlanted": "2019-04-19T00:00:00.000Z",
+      "daysToHarvest": 50,
+      "objCreateMinWidth": 72,
+      "objCreateMinHeight": 72,
+      "objCreateWidth": 72,
+      "objCreateHeight": 72
     }
   ],
   "plot": [
@@ -280,7 +292,7 @@
       "top": 0,
       "left": 102,
       "height": 72,
-      "width": 480,
+      "width": 288,
       "minWidth": 48,
       "minHeight": 72,
       "daysToHarvest": 10,
@@ -322,6 +334,24 @@
       "daysToHarvest": 10,
       "datePlanted": "10/15/2019",
       "harvestDate": "10/25/2019"
+    },
+    {
+      "id": "plant31",
+      "parentId": "grid",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/pepper.png",
+      "zIndex": "3",
+      "title": "Habanero",
+      "top": 24,
+      "left": 862,
+      "height": 192,
+      "width": 288,
+      "minWidth": 48,
+      "minHeight": 48,
+      "daysToHarvest": 30,
+      "datePlanted": "04/11/2019",
+      "harvestDate": "05/11/2019"
     }
   ]
 }
