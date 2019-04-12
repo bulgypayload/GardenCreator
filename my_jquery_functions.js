@@ -126,8 +126,6 @@ function saveToServer(myString)
         if (this.readyState == 4 && this.status == 200) {
             var txt = this.responseText;    
              console.log(txt);
-             document.getElementById("notification").innerHTML = "Saved";
-             $("#notification").show("fold", 1000);
         }
 };
     document.getElementById("notification").innerHTML = "Saving..";

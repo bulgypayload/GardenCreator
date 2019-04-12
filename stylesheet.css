@@ -13,7 +13,9 @@ body {
   background-repeat: no-repeat;
 }
 #notification{
-  display:none;  
+  display:none;
+  position: absolute;
+  right: 5px;  
 }
 
 #toolBar {
