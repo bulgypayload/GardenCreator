@@ -126,9 +126,9 @@ function saveToServer(myString)
         if (this.readyState == 4 && this.status == 200) {
             var txt = this.responseText; 
             document.getElementById("notification").innerHTML = txt; 
-            $("#notification").show("fast", "swing");
+            $("#notification").show("slow", "swing");
             console.log(txt);
-            $("#notification").hide("fast", "swing");
+            $("#notification").hide("slow", "swing");
             document.getElementById("notification").innerHTML = "Saving...";
         }
 };    
