@@ -1032,7 +1032,7 @@ function heightWidthMakeAMultiple(changedPlant)
 //Function that disable the tooltip based on classType class or id
 function disableToolTip(classType)
 {
-  $(classType).tooltip("disable";
+  $(classType).tooltip("disable");
 }
 
 //Function that enable the tooltip based on classType class or id
