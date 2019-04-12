@@ -128,6 +128,7 @@ function saveToServer(myString)
             document.getElementById("notification").innerHTML = txt; 
             $("#notification").show("fast", "swing");
             console.log(txt);
+            $("#notification").hide("fast", "swing");
             document.getElementById("notification").innerHTML = "Saving...";
         }
 };    
