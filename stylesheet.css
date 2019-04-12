@@ -16,7 +16,8 @@ body {
   display:none;
   position: absolute;
   right: 5px; 
-  color: white; 
+  color: black;
+  background-color: white; 
 }
 
 #toolBar {
