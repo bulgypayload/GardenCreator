@@ -124,15 +124,16 @@ function saveToServer(myString)
     xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            var txt = this.responseText; 
-            document.getElementById("notification").innerHTML = txt; 
-            $("#notification").show("slow", "swing");
-            console.log(txt);
-            $("#notification").hide("slow", "swing");
-            document.getElementById("notification").innerHTML = "Saving...";
+            var txt = this.responseText;
+            console.log(txt);            
+            $("#notification2").show("slow", "swing", function(){
+              $("#notification2").hide("slow", "swing");
+            });
         }
 };    
-    $("#notification").show("fast", "swing");
+    $("#notification").show("slow", "swing", function(){
+              $("#notification").hide("slow", "swing");
+            });
     xmlhttp.open("POST", "save.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("x=" + dbParam);
