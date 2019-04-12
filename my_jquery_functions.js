@@ -866,6 +866,7 @@ function createToolTip(gardenObject)
             return createPlotTooltipString($(this), gardenObject);
           }
         },
+        delay: 1000,
         disabled: false,
         track: false,
         close: function (event, ui) {
@@ -1031,13 +1032,13 @@ function heightWidthMakeAMultiple(changedPlant)
 //Function that disable the tooltip based on classType class or id
 function disableToolTip(classType)
 {
-  $(classType).tooltip("option","disabled", true);
+  $(classType).tooltip("disable";
 }
 
 //Function that enable the tooltip based on classType class or id
 function enableToolTip(classType)
 {
-  $(classType).tooltip("option", "disabled", false);
+  $(classType).tooltip("enable");
 }
 
 
