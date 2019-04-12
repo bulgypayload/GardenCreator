@@ -15,7 +15,8 @@ body {
 #notification{
   display:none;
   position: absolute;
-  right: 5px;  
+  right: 5px; 
+  color: white; 
 }
 
 #toolBar {
