@@ -866,7 +866,9 @@ function createToolTip(gardenObject)
             return createPlotTooltipString($(this), gardenObject);
           }
         },
-        delay: 1000,
+        show:{
+          delay: 1000
+        },
         disabled: false,
         track: false,
         close: function (event, ui) {
