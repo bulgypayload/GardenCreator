@@ -428,8 +428,6 @@ function isFilledOut()
     //$("#picInput").val(),
     $("#myDatePlanted").val(),
     $("#daysToHarvest").val(),
-    $("#plantSpacing").val(),
-    $("#rowSpacing").val(),
     $("#rowSpacing").val(),
     $("#plantSpacing").val());
 
@@ -934,55 +932,83 @@ function editButtonClick(objectId)
                 + day[0].match(regexAnyNumber).toString() + "-"
                 + month[0].match(regexAnyNumber).toString();
 
-            $("#variety2").val(myPlants[i].title);
-            $("#daysToHarvest2").val(myPlants[i].daysToHarvest);  
-            $("#plantSpacing2").val(myPlants[i].minWidth / 2);
-            $("#rowSpacing2").val(myPlants[i].minHeight / 2);            
+            
+                $("#variety2").val(myPlants[i].title);
+                $("#daysToHarvest2").val(myPlants[i].daysToHarvest);  
+                $("#plantSpacing2").val(myPlants[i].minWidth / 2);
+                $("#rowSpacing2").val(myPlants[i].minHeight / 2);                       
         }
     }
 }
 
+function checkEditForm(){
+    var check = true; 
+
+    var inputField = new Array($("#variety2").val(),
+    //$("#picInput").val(),
+    $("#myDatePlanted2").val(),
+    $("#daysToHarvest2").val(),
+    $("#rowSpacing2").val(),
+    $("#plantSpacing2").val());
+
+    for(var i =0; i < inputField.length; i++)
+    {
+        if(inputField[i] === "" || inputField[i] === null)
+        {
+            check = false;
+            break; 
+        }
+    };
+    return check;
+}
+
 function saveEditClick()
 {
+    if(checkEditForm())
+    {
     var newPlant; 
 
-	for(var i = 0; i < myPlants.length; i++)
-	{
-		if(myPlants[i].id === editObjectId)
-		{
-			newPlant = myPlants[i]; 
-            $("#" + myPlants[i].id).remove();            
-            delete myPlants[i];
-            myPlants = myPlants.filter(function(x) { return true });             
-		}
-	}
-    
-    // Get the current date and put in format MM/DD/YYYY    
-    var createDatePlanted = new Date(document.getElementById("myDatePlanted2").valueAsDate);
-    var month = ((createDatePlanted.getUTCMonth() + 1) < 10) ? "0" + (createDatePlanted.getUTCMonth() + 1) : createDatePlanted.getUTCMonth() + 1;
-    var day = (createDatePlanted.getUTCDate() < 10) ? "0" + createDatePlanted.getUTCDate() : createDatePlanted.getUTCDate();
-    var myDate = month + "/" + day + "/" + createDatePlanted.getUTCFullYear();
-    
-    console.log(myDate);
-    //backgroundImage : buttonObj.backgroundImage,          
-    newPlant.title = $("#variety2").val();
-    newPlant.minWidth = $("#plantSpacing2").val() * 2;
-    newPlant.minHeight = $("#rowSpacing2").val() * 2,
-    newPlant.daysToHarvest = $("#daysToHarvest2").val() *1;
-    newPlant.datePlanted  = myDate;
-    newPlant.harvestDate  = calculateHarvestDate(createDatePlanted, $("#daysToHarvest2").val() *1); 
-
-    newPlant = heightWidthMakeAMultiple(newPlant); 
+    	for(var i = 0; i < myPlants.length; i++)
+    	{
+    		if(myPlants[i].id === editObjectId)
+    		{
+    			newPlant = myPlants[i]; 
+                $("#" + myPlants[i].id).remove();            
+                delete myPlants[i];
+                myPlants = myPlants.filter(function(x) { return true });             
+    		}
+    	}
         
-    myPlants.push(newPlant);
-    createStuff(newPlant)
-    plantCount++; 
+        // Get the current date and put in format MM/DD/YYYY    
+        var createDatePlanted = new Date(document.getElementById("myDatePlanted2").valueAsDate);
+        var month = ((createDatePlanted.getUTCMonth() + 1) < 10) ? "0" + (createDatePlanted.getUTCMonth() + 1) : createDatePlanted.getUTCMonth() + 1;
+        var day = (createDatePlanted.getUTCDate() < 10) ? "0" + createDatePlanted.getUTCDate() : createDatePlanted.getUTCDate();
+        var myDate = month + "/" + day + "/" + createDatePlanted.getUTCFullYear();    
+        
+        //backgroundImage : buttonObj.backgroundImage,          
+        newPlant.title = $("#variety2").val();
+        newPlant.minWidth = $("#plantSpacing2").val() * 2;
+        newPlant.minHeight = $("#rowSpacing2").val() * 2,
+        newPlant.daysToHarvest = $("#daysToHarvest2").val() *1;
+        newPlant.datePlanted  = myDate;
+        newPlant.harvestDate  = calculateHarvestDate(createDatePlanted, $("#daysToHarvest2").val() *1); 
 
-	document.getElementById('id02').style.display='none';
-    $("#variety2").val("");
-    $("#plantSpacing2").val("");
-    $("#rowSpacing2").val(""); 
-    $("#daysToHarvest2").val("");
+        newPlant = heightWidthMakeAMultiple(newPlant); 
+            
+        myPlants.push(newPlant);
+        createStuff(newPlant)
+        plantCount++;
+
+    	document.getElementById('id02').style.display='none';
+        $("#variety2").val("");
+        $("#plantSpacing2").val("");
+        $("#rowSpacing2").val(""); 
+        $("#daysToHarvest2").val("");
+    }
+    else
+    {
+        alert("Please fill out all fields."); 
+    }
 }
 
 //Changes the height and width to be a multiple of the minHeight minWidth
