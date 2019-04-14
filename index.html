@@ -28,15 +28,34 @@
 		<li id="menuDelete" class="menu-option">Delete Button</li>
 	</ul>
 </div>	
-<div id="toolBar">
-<button id="saveGarden" class="addButton" title="Save">Save</button>
-<button id="deleteObject" class="addButton" title="Delete Selected plants and plots.">Delete</button>
-<button id="addPlot" class="addButton" title="Add Plot">Add Plot</button>
-<button id="addPlant" class="addButton" title="Add Plant">Add Plant</button>
+	<div id="toolBar">
+	<button id="saveGarden" class="addButton" title="Save">Save</button>
+	<button id="deleteObject" class="addButton" title="Delete Selected plants and plots.">Delete</button>
+	<button id="addPlot" class="addButton" title="Add Plot">Add Plot</button>
+	<button id="addPlant" class="addButton" title="Add Plant">Add Plant</button>
 </div>
 <!--This is the popup for for the new plants-->
 
+<!--Repositions the toolbar on scroll-->
+<script>
+	// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
 
+// Get the navbar
+var toolBar = document.getElementById("toolBar");
+
+// Get the offset position of the navbar
+var sticky = toolBar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    toolBar.classList.add("sticky")
+  } else {
+    toolBar.classList.remove("sticky");
+  }
+} 
+</script>
  <!-- Button to open the modal login form -->
 
 <!-- The Modal -->
