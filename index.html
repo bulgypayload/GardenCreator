@@ -35,27 +35,6 @@
 	<button id="addPlant" class="addButton" title="Add Plant">Add Plant</button>
 </div>
 <!--This is the popup for for the new plants-->
-
-<!--Repositions the toolbar on scroll-->
-<script>
-	// When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
-
-// Get the navbar
-var toolBar = document.getElementById("toolBar");
-
-// Get the offset position of the navbar
-var sticky = toolBar.offsetTop;
-
-// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    toolBar.classList.add("sticky")
-  } else {
-    toolBar.classList.remove("sticky");
-  }
-} 
-</script>
  <!-- Button to open the modal login form -->
 
 <!-- The Modal -->
@@ -198,5 +177,33 @@ function myFunction() {
 		<button id="decreaseGridHeight" title="Click to decrease grid height">- Height</button>
 	</div>
 </div>
+
+<!--Repositions the toolbar on scroll-->
+<script>
+	// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the navbar
+var toolBar = document.getElementById("toolBar");
+var container = document.getElementById("container");
+
+// Get the offset position of the navbar
+var sticky = toolBar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    toolBar.classList.add("sticky");
+    container.classList.add("stickyContainer");
+    $(".stickyContainer").css("margin-top", $("#toolBar").height() + 50);
+
+  } else {
+    toolBar.classList.remove("sticky");
+    $(".stickyContainer").css("margin-top", 0);
+    container.classList.remove("stickyContainer");
+  }
+} 
+</script>
+
 </body>
 </html>
