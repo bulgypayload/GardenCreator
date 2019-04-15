@@ -29,10 +29,13 @@
 	</ul>
 </div>	
 	<div id="toolBar">
+		<div id="toolBarObjects">
 	<button id="saveGarden" class="addButton" title="Save">Save</button>
 	<button id="deleteObject" class="addButton" title="Delete Selected plants and plots.">Delete</button>
 	<button id="addPlot" class="addButton" title="Add Plot">Add Plot</button>
 	<button id="addPlant" class="addButton" title="Add Plant">Add Plant</button>
+	
+	</div>
 </div>
 <!--This is the popup for for the new plants-->
  <!-- Button to open the modal login form -->
@@ -196,11 +199,21 @@ function myFunction() {
     toolBar.classList.add("sticky");
     container.classList.add("stickyContainer");
     $(".stickyContainer").css("margin-top", $("#toolBar").height() + 50);
+    $("#toolBarObjects button").css({
+    	width: 50,
+    	height: 50,
+    	"font-size": "8px"
+    });
 
   } else {
     toolBar.classList.remove("sticky");
     $(".stickyContainer").css("margin-top", 0);
     container.classList.remove("stickyContainer");
+    $("#toolBarObjects button").css({
+    	width: 80,
+    	height: 70,
+    	"font-size":"15px"
+    });
   }
 } 
 </script>

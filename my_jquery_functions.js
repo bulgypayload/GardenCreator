@@ -159,8 +159,8 @@ $("#addPlot").click(function(){
       backgroundImage: "pictures/ground.jpg",
       title: "Plot " + plotCount,
       zIndex: "2",
-      top: $(window).scrollTop() + $(window).height() / 2,
-      left: 0,
+      top: $(window).scrollTop(),
+      left: 100,
       height: 100,
       width: 100,
       moistureLevel: "20%"
@@ -460,6 +460,7 @@ const toggleMenu = command => {
 
 const setPosition = ({ top, left }) => {
   $(".menu").css({
+    "position": "absolute",
     top: top,
     left: left 
     });
@@ -475,7 +476,7 @@ window.addEventListener("click", e => {
 //add a button and the click event function test
  function createButton(buttonObj){
 	// Add the button to the html doc TODO add the title to the buttons create method
-    $("#toolBar").append("<button id="+ buttonObj.id + " title=\""
+    $("#toolBarObjects").append("<button id="+ buttonObj.id + " title=\""
         + buttonObj.title +"\" class=addButton style=background-Image:url("
         + buttonObj.backgroundImage +")></button>");
     	  

@@ -33,7 +33,16 @@ body {
   border-color: black;
   text-align: center;
   border-radius: 5px 5px 0px 0px;
-  z-index: 99;
+  z-index: 99;  
+}
+#toolBar button, #toolBarObjects button{
+  display: inline-block;
+}
+
+#toolBarObjects
+{
+  overflow: auto;
+  white-space: nowrap; 
 }
 
 /* The sticky class is added to the navbar with JS when it reaches its scroll position */
@@ -152,7 +161,7 @@ left: 30%;
 #addPlot, #saveGarden, #deleteObject {
   background-color: white;
   color: black;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .addButton {
@@ -170,8 +179,6 @@ left: 30%;
 #addPlant {
   background-image: url("pictures/plant.jpg");
 }
-
-
 
  button{
   width: 80px;

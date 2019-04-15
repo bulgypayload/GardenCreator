@@ -1,6 +1,6 @@
 {
   "settings": {
-    "plantCount": 36,
+    "plantCount": 37,
     "plotCount": 1,
     "buttonCount": 15,
     "gridHeight": 2020,
@@ -215,8 +215,8 @@
       "backgroundImage": "pictures/ground.jpg",
       "title": "Plot 0",
       "zIndex": "2",
-      "top": 69,
-      "left": 174,
+      "top": 26,
+      "left": 153,
       "height": 416,
       "width": 596,
       "moistureLevel": "20%"
@@ -375,8 +375,8 @@
       "backgroundImage": "pictures/lettuce.png",
       "zIndex": "3",
       "title": "Lettuce",
-      "top": 20,
-      "left": 100,
+      "top": 256,
+      "left": 855,
       "height": 48,
       "width": 48,
       "minWidth": 48,
@@ -384,6 +384,24 @@
       "daysToHarvest": 30,
       "datePlanted": "04/01/2019",
       "harvestDate": "05/01/2019"
+    },
+    {
+      "id": "plant36",
+      "parentId": "plot0",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/tomato2.png",
+      "zIndex": "3",
+      "title": "Cherry Tomato",
+      "top": 3,
+      "left": 439,
+      "height": 48,
+      "width": 144,
+      "minWidth": 48,
+      "minHeight": 48,
+      "daysToHarvest": 10,
+      "datePlanted": "04/01/2019",
+      "harvestDate": "04/11/2019"
     }
   ]
 }
