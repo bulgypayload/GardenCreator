@@ -14,8 +14,10 @@ body {
 }
 
 #notifications{
- position:absolute;
- right: 5px; 
+ position:fixed;
+ left: 5px;
+ top: 5px;
+ z-index: 99; 
 }
 #notification, #notification2{
   display:none;
@@ -27,13 +29,13 @@ body {
 
 #toolBar {
   background-image: url("pictures/ground.jpg");
-  padding: 20px;
+  padding: 15px;
   border-width: 1px 1px 1px 1px;
   border-style: solid;
   border-color: black;
   text-align: center;
   border-radius: 5px 5px 0px 0px;
-  z-index: 99;  
+  z-index: 98;  
 }
 #toolBar button, #toolBarObjects button{
   display: inline-block;
