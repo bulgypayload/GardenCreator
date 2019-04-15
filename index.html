@@ -198,7 +198,7 @@ function myFunction() {
   if (window.pageYOffset >= sticky) {
     toolBar.classList.add("sticky");
     container.classList.add("stickyContainer");
-    $(".stickyContainer").css("margin-top", $("#toolBar").height() + 50);
+    $(".stickyContainer").css("margin-top", $("#toolBar").height());
     $("#toolBarObjects button").css({
     	width: 50,
     	height: 50,
@@ -215,7 +215,7 @@ function myFunction() {
     	height: 70,
     	"font-size":"15px"
     });
-    $("#toolBar").css("padding", "15px");
+    $("#toolBar").css("padding", "5px");
   }
 } 
 </script>
