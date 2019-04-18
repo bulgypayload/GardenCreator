@@ -446,6 +446,7 @@ End Image slide show css.
   display: none;
   left: 0;
   top: 0;
+  z-index: 99;
 }
 
   .menu-options {

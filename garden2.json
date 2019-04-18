@@ -1,8 +1,8 @@
 {
   "settings": {
-    "plantCount": 47,
+    "plantCount": 51,
     "plotCount": 2,
-    "buttonCount": 19,
+    "buttonCount": 20,
     "gridHeight": 885,
     "gridWidth": 1366
   },
@@ -108,6 +108,18 @@
       "objCreateMinHeight": 48,
       "objCreateWidth": 48,
       "objCreateHeight": 48
+    },
+    {
+      "id": "button19",
+      "class": "addButton",
+      "backgroundImage": "pictures/tomato2.png",
+      "title": "Onions",
+      "datePlanted": "2019-04-19",
+      "daysToHarvest": 55,
+      "objCreateMinWidth": 48,
+      "objCreateMinHeight": 48,
+      "objCreateWidth": 48,
+      "objCreateHeight": 48
     }
   ],
   "plot": [
@@ -119,50 +131,14 @@
       "backgroundImage": "pictures/ground.jpg",
       "title": "Plot 1",
       "zIndex": "2",
-      "top": 136,
-      "left": 222,
+      "top": 29,
+      "left": 259,
       "height": 371,
-      "width": 705,
+      "width": 725,
       "moistureLevel": "20%"
     }
   ],
   "plant": [
-    {
-      "id": "plant43",
-      "parentId": "plot1",
-      "classType": "plant",
-      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
-      "backgroundImage": "pictures/tomato2.png",
-      "zIndex": "3",
-      "title": "Cherry Tomatos",
-      "top": 22,
-      "left": 50,
-      "height": 48,
-      "width": 624,
-      "minWidth": 48,
-      "minHeight": 48,
-      "daysToHarvest": 55,
-      "datePlanted": "04/17/2019",
-      "harvestDate": "06/11/2019"
-    },
-    {
-      "id": "plant44",
-      "parentId": "plot1",
-      "classType": "plant",
-      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
-      "backgroundImage": "pictures/greenBean.png",
-      "zIndex": "3",
-      "title": "Green Beans",
-      "top": 96,
-      "left": 58,
-      "height": 48,
-      "width": 624,
-      "minWidth": 48,
-      "minHeight": 48,
-      "daysToHarvest": 45,
-      "datePlanted": "04/17/2019",
-      "harvestDate": "06/01/2019"
-    },
     {
       "id": "plant45",
       "parentId": "plot1",
@@ -198,6 +174,24 @@
       "daysToHarvest": 65,
       "datePlanted": "04/17/2019",
       "harvestDate": "06/21/2019"
+    },
+    {
+      "id": "plant44",
+      "parentId": "plot1",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/greenBean.png",
+      "zIndex": "3",
+      "title": "Green Beans",
+      "top": 96,
+      "left": 58,
+      "height": 48,
+      "width": 648,
+      "minWidth": 72,
+      "minHeight": 48,
+      "daysToHarvest": 45,
+      "datePlanted": "10/22/2019",
+      "harvestDate": "12/06/2019"
     }
   ]
 }
