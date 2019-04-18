@@ -126,14 +126,10 @@ function saveToServer(myString)
         if (this.readyState == 4 && this.status == 200) {
             var txt = this.responseText;
             console.log(txt);            
-            $("#notification2").show("slow", "swing", function(){
-              $("#notification2").hide("slow", "swing");
-            });
+            notification("Saved");
         }
 };    
-    $("#notification").show("slow", "swing", function(){
-              $("#notification").hide("slow", "swing");
-            });
+    notification("Saving...");
     xmlhttp.open("POST", "save.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("x=" + dbParam);
@@ -249,9 +245,20 @@ function deleteSelected() {
     myPlants = myPlants.filter(function(x) { return true });
     myPlots = myPlots.filter(function(x) { return true }); 
     myPlots = myPlots.filter(function(x) { return true });
+    notification("Items Deleted");
 }//end delete selected elements
 
 });}//end document ready function
+
+function notification(displayText)
+{
+   $("#notification").text(displayText);
+  $("#notification").show("slow", "linear", function(){
+
+               setTimeout(function(){$("#notification").hide("slow", "linear"); }, 2000);
+            });
+  
+}
 
 function deleteButton(buttonId)
 {
@@ -354,8 +361,8 @@ function createNewButton()
             class: "addButton",
             backgroundImage: getSelectedBackgroundImage(),
             title: $("#variety").val(),
-            datePlanted: document.getElementById("myDatePlanted").valueAsDate,
-            daysToHarvest: $("#daysToHarvest").val()*1,
+            datePlanted: document.getElementById("myDatePlanted").value,
+            daysToHarvest: $("#daysToHarvest").val() * 1,
             objCreateMinWidth: $("#plantSpacing").val() * 2,
             objCreateMinHeight: $("#rowSpacing").val() * 2,
             objCreateWidth: $("#plantSpacing").val() * 2,
@@ -367,7 +374,8 @@ function createNewButton()
         myButtons.push(myNewPlant);  
         clearModalInput();
         document.getElementById('id01').style.display='none';        
-        buttonCount++;
+        buttonCount++; 
+        notification("Button added.");       
     }
     else{
         alert("Please fill out all fields.");
@@ -409,6 +417,11 @@ function getSelectedBackgroundImage()
     else{
         return "pictures/" + pictureSelected.files[0].name 
     }
+}
+
+function cancelButtonClick(){
+  document.getElementById('id01').style.display='none';
+  clearModalInput();
 }
 
 //Clears the input fields 
@@ -525,7 +538,7 @@ window.addEventListener("click", e => {
 	  myPlants.push(gardenObject);
       createStuff(gardenObject)
 	  plantCount++; 
-    });	
+    });	    
  }
 
  function calculateHarvestDate(plantDate, daysToHarvest)
@@ -585,7 +598,7 @@ function createPlot(gardenObject) {
     var width = ($("#" + gardenObject.id).width()/pixelsPerFoot).toFixed(2);
     var height = ($("#" + gardenObject.id).height()/pixelsPerFoot).toFixed(2);
     $(".plotWidthLabel:first").text(width + " ft"); 
-    $(".plotHeightLabel:first").text(height + " ft");
+    $(".plotHeightLabel:first").text(height + " ft");   
 
 }//end createPlot
 
@@ -776,7 +789,8 @@ function makePlotDroppable(gardenObject) {
     $("#" + gardenObject.id).droppable({
         tolerance: "touch",
         accept: ".plantJ, .plant",
-        drop: function(event, ui){            
+        drop: function(event, ui)
+        {            
                 $(this).prepend(ui.draggable);
 
                 var left  = ui.offset.left - $(this).offset().left;
@@ -990,7 +1004,7 @@ function saveEditClick()
     	}
         
         // Get the current date and put in format MM/DD/YYYY    
-        var createDatePlanted = new Date(document.getElementById("myDatePlanted2").valueAsDate);
+        var createDatePlanted = new Date(document.getElementById("myDatePlanted2").value);
         var month = ((createDatePlanted.getUTCMonth() + 1) < 10) ? "0" + (createDatePlanted.getUTCMonth() + 1) : createDatePlanted.getUTCMonth() + 1;
         var day = (createDatePlanted.getUTCDate() < 10) ? "0" + createDatePlanted.getUTCDate() : createDatePlanted.getUTCDate();
         var myDate = month + "/" + day + "/" + createDatePlanted.getUTCFullYear();    
@@ -1014,6 +1028,7 @@ function saveEditClick()
         $("#plantSpacing2").val("");
         $("#rowSpacing2").val(""); 
         $("#daysToHarvest2").val("");
+        notification("Edit made.");
     }
     else
     {

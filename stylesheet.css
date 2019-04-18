@@ -29,16 +29,27 @@ body {
 
 #toolBar {
   background-image: url("pictures/ground.jpg");
-  padding: 15px;
+  padding: 5px;
   border-width: 1px 1px 1px 1px;
   border-style: solid;
   border-color: black;
   text-align: center;
   border-radius: 5px 5px 0px 0px;
-  z-index: 98;  
+  z-index: 98; 
+  position:sticky;
+  top:0px;
+  margin-top: 0px; 
 }
+
+.sticky{
+  width: 50px;
+  height: 50px;
+  font-size: 8px;
+}
+
 #toolBar button, #toolBarObjects button{
   display: inline-block;
+
 }
 
 #toolBarObjects
@@ -47,18 +58,6 @@ body {
   white-space: nowrap; 
 }
 
-/* The sticky class is added to the navbar with JS when it reaches its scroll position */
-.sticky {
-  position: fixed;
-  top: 0;
-  right: 5px;
-  left: 8px;
-}
-
-/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-.stickyContainer{
-  margin-top: 66px;
-}
 
 .plot {
   height: 100px;
@@ -160,15 +159,33 @@ left: 30%;
 
 /* buttons */
 
-#addPlot, #saveGarden, #deleteObject {
+#addPlant, #saveGarden, #deleteObject  {
   background-color: white;
   color: black;
   font-size: 15px;
+  background-size: contain;
+}
+
+#addPlot{
+  background-image: url("pictures/ground.jpg");
+  color: white;
+}
+
+#saveGarden{
+  background-image: url("pictures/saveIcon.png");
+}
+
+#deleteObject{
+  background-image: url("pictures/deleteIcon.png");
+}
+
+#addPlant {
+  background-image: url("pictures/addIcon.png");
 }
 
 .addButton {
-  background-size: cover;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 .editButton{
   display: block;
@@ -178,13 +195,9 @@ left: 30%;
   background-color: green;
 }
 
-#addPlant {
-  background-image: url("pictures/plant.jpg");
-}
-
  button{
-  width: 80px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   vertical-align: middle;
   font-size: 15px;
   border: solid 1px black;

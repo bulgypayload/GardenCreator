@@ -30,10 +30,11 @@
 </div>	
 	<div id="toolBar">
 		<div id="toolBarObjects">
-	<button id="saveGarden" class="addButton" title="Save">Save</button>
-	<button id="deleteObject" class="addButton" title="Delete Selected plants and plots.">Delete</button>
-	<button id="addPlot" class="addButton" title="Add Plot">Add Plot</button>
-	<button id="addPlant" class="addButton" title="Add Plant">Add Plant</button>
+	<button id="saveGarden" class="addButton" title="Save"></button>
+	<button id="deleteObject" class="addButton" title="Delete Selected plants and plots."></button>
+	<button id="addPlant" class="addButton" title="Add Plant"></button>
+	<button id="addPlot" class="addButton" title="Add Plot">Plot</button>
+	
 	
 	</div>
 </div>
@@ -106,13 +107,14 @@
 		</div>
 
 		<div class="formSection"> 
-			<div class="splitLine"><!-- input "require" taken out-->				  <input id="picInput" type="file" name="backImage" accept="image/*">
+			<div class="splitLine"><!-- input "require" taken out-->				  
+				<input id="picInput" type="file" name="backImage" accept="image/*">
 			</div>
 		 </div>
 		<div class="formSection">
 			<div class="splitLine">
 			  <button id="buttonAdd" type="button" onclick="createNewButton()">Add</button>
-			  <button id="buttonCancel"type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+			  <button id="buttonCancel"type="button" onclick="cancelButtonClick()">Cancel</button>
 			</div>
 		</div>
   </form>
@@ -181,44 +183,15 @@
 	</div>
 </div>
 
-<!--Repositions the toolbar on scroll-->
 <script>
-	// When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
-
-// Get the navbar
-var toolBar = document.getElementById("toolBar");
-var container = document.getElementById("container");
-
-// Get the offset position of the navbar
-var sticky = toolBar.offsetTop;
-
-// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    toolBar.classList.add("sticky");
-    container.classList.add("stickyContainer");
-    $("#toolBarObjects button").css({
-    	width: 50,
-    	height: 50,
-    	"font-size": "8px"
-    });
-    $("#toolBar").css("padding", "5px");    
-    $(".stickyContainer").css("margin-top", 66);
-
-  } else {
-    toolBar.classList.remove("sticky");
-    $(".stickyContainer").css("margin-top", 0);
-    container.classList.remove("stickyContainer");
-    $("#toolBarObjects button").css({
-    	width: 80,
-    	height: 70,
-    	"font-size":"15px"
-    });
-    $("#toolBar").css("padding", "15px");    
-    
-  }
-} 
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 78){  
+        $('#toolBarObjects > button').addClass("sticky");
+    }
+    else{
+        $('#toolBarObjects > button').removeClass("sticky");
+    }
+});
 </script>
 
 </body>
