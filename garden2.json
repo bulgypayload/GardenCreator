@@ -1,6 +1,6 @@
 {
   "settings": {
-    "plantCount": 51,
+    "plantCount": 52,
     "plotCount": 2,
     "buttonCount": 20,
     "gridHeight": 885,
@@ -192,6 +192,24 @@
       "daysToHarvest": 45,
       "datePlanted": "10/22/2019",
       "harvestDate": "12/06/2019"
+    },
+    {
+      "id": "plant51",
+      "parentId": "plot1",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/tomato2.png",
+      "zIndex": "3",
+      "title": "Cherry Tomatos",
+      "top": 16,
+      "left": 71,
+      "height": 48,
+      "width": 624,
+      "minWidth": 48,
+      "minHeight": 48,
+      "daysToHarvest": 55,
+      "datePlanted": "04/17/2019",
+      "harvestDate": "06/11/2019"
     }
   ]
 }

@@ -185,6 +185,10 @@
 
 <script>
 $(window).scroll(function() {
+	if($(".menu").css("display") === "block")
+	{
+		$(".menu").css("display", "none");
+	}
     if ($(this).scrollTop() > 78){  
         $('#toolBarObjects > button').addClass("sticky");
     }
