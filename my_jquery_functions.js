@@ -415,26 +415,26 @@ function getSelectedBackgroundImage()
         return $("img.active").attr('src'); 
     }
     else{
-      //upload(pictureSelected.files[0]);
+        upload(pictureSelected);
         return "pictures/" + pictureSelected.files[0].name 
     }
 }
 
-function upload(filePath)
+function upload(pictureSelected)
 {
-  var dbParam = filePath;
-    xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var txt = this.responseText;
-            console.log(txt);            
-            notification("Picture Uploaded");
-        }
-};    
-    notification("Picture uploading..");
-    xmlhttp.open("POST", "upload.php", true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("x=" + dbParam);
+  var myFormData = new FormData();
+
+  myFormData.append('fileToUpload', pictureSelected.files[0]); 
+  $.ajax({
+    url: 'upload.php',
+    type: 'POST',
+    processData: false,
+    contentType: false,
+    dataType : 'json',
+    data: myFormData
+  });
+  notification("File uploaded.");
+
 }
 
 function cancelButtonClick(){
