@@ -431,11 +431,12 @@ function upload(pictureSelected)
     processData: false,
     contentType: false,
     data: myFormData,
+    async:false,
     success: function(response){
-      console.log(response); 
+      notification(response); 
     }
   });
-  notification("File uploaded.");
+  
 }
 
 function cancelButtonClick(){
