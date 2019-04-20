@@ -434,6 +434,7 @@ function upload(pictureSelected)
     async:false,
     success: function(response){
       notification(response); 
+      console.log(response); 
     }
   });
   
