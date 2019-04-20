@@ -424,17 +424,18 @@ function upload(pictureSelected)
 {
   var myFormData = new FormData();
 
-  myFormData.append('fileToUpload', pictureSelected.files[0]); 
+  myFormData.append('fileToUpload', pictureSelected.files[0], pictureSelected.files[0].name); 
   $.ajax({
     url: 'upload.php',
     type: 'POST',
     processData: false,
     contentType: false,
-    dataType : 'json',
-    data: myFormData
+    data: myFormData,
+    success: function(response){
+      console.log(response); 
+    }
   });
   notification("File uploaded.");
-
 }
 
 function cancelButtonClick(){
