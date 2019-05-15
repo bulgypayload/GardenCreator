@@ -1,8 +1,8 @@
 {
   "settings": {
-    "plantCount": 73,
+    "plantCount": 74,
     "plotCount": 3,
-    "buttonCount": 40,
+    "buttonCount": 41,
     "gridHeight": 1666,
     "gridWidth": 1366
   },
@@ -58,6 +58,10 @@
     {
       "source": "pictures/greenBeans.jpg",
       "alt": "Hello"
+    },
+    {
+      "source": "pictures/broccoli.png",
+      "alt": "Broccoli"
     }
   ],
   "button": [
@@ -242,18 +246,6 @@
       "objCreateHeight": 48
     },
     {
-      "id": "button37",
-      "class": "addButton",
-      "backgroundImage": "pictures/potato.png",
-      "title": "Broccoli",
-      "datePlanted": "2019-04-20",
-      "daysToHarvest": 55,
-      "objCreateMinWidth": 36,
-      "objCreateMinHeight": 36,
-      "objCreateWidth": 36,
-      "objCreateHeight": 36
-    },
-    {
       "id": "button39",
       "class": "addButton",
       "backgroundImage": "pictures/greenBean.png",
@@ -263,6 +255,18 @@
       "objCreateMinWidth": 12,
       "objCreateMinHeight": 36,
       "objCreateWidth": 12,
+      "objCreateHeight": 36
+    },
+    {
+      "id": "button40",
+      "class": "addButton",
+      "backgroundImage": "pictures/broccoli.png",
+      "title": "Broccoli",
+      "datePlanted": "2019-04-20",
+      "daysToHarvest": 55,
+      "objCreateMinWidth": 36,
+      "objCreateMinHeight": 36,
+      "objCreateWidth": 36,
       "objCreateHeight": 36
     }
   ],
@@ -554,24 +558,6 @@
       "harvestDate": "07/09/2019"
     },
     {
-      "id": "plant68",
-      "parentId": "plot2",
-      "classType": "plant",
-      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
-      "backgroundImage": "pictures/potato.png",
-      "zIndex": "3",
-      "title": "Broccoli",
-      "top": 301,
-      "left": 97,
-      "height": 36,
-      "width": 180,
-      "minWidth": 36,
-      "minHeight": 36,
-      "daysToHarvest": 55,
-      "datePlanted": "04/20/2019",
-      "harvestDate": "06/14/2019"
-    },
-    {
       "id": "plant69",
       "parentId": "plot2",
       "classType": "plant",
@@ -606,6 +592,24 @@
       "daysToHarvest": 58,
       "datePlanted": "04/20/2019",
       "harvestDate": "06/17/2019"
+    },
+    {
+      "id": "plant73",
+      "parentId": "plot2",
+      "classType": "plant",
+      "class": "plant small ui-resizable ui-draggable ui-draggable-handle",
+      "backgroundImage": "pictures/broccoli.png",
+      "zIndex": "3",
+      "title": "Broccoli",
+      "top": 303,
+      "left": 104,
+      "height": 36,
+      "width": 180,
+      "minWidth": 36,
+      "minHeight": 36,
+      "daysToHarvest": 55,
+      "datePlanted": "04/20/2019",
+      "harvestDate": "06/14/2019"
     }
   ]
 }
