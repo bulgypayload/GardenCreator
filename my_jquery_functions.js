@@ -89,7 +89,7 @@ var plot = ".plot";
 var plantNumber = 0;
 //-----------------------------old place of myGarden-----------------------------------------------test
 
-//This is the save button onclick function. 
+//This is the delete button onclick function. 
 $("#deleteObject").click(function(){  
     deleteSelected();   
 });
@@ -113,7 +113,7 @@ $("#saveGarden").click(function(){
     var  myString = JSON.stringify(myGarden, null, 2);
     //To save Locally use saveToLocalJSON method saveToLocalJSON(myString); 
     saveToServer(myString);     
-	
+	//saveToLocalJSON(myString);
 });
 
 //Function to make post request to save JSON file. 
