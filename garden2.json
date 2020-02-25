@@ -3,8 +3,8 @@
     "plantCount": 75,
     "plotCount": 3,
     "buttonCount": 42,
-    "gridHeight": 2027,
-    "gridWidth": 3840
+    "gridHeight": 527,
+    "gridWidth": 1340
   },
   "myPictures": [
     {
@@ -283,8 +283,8 @@
       "backgroundImage": "pictures/ground.jpg",
       "title": "Plot 2",
       "zIndex": "2",
-      "top": 36,
-      "left": 115,
+      "top": 32,
+      "left": 332,
       "height": 360,
       "width": 673,
       "moistureLevel": "20%"
